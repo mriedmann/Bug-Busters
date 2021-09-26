@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.List;
 
+// REVIEW: ok
 @RestController
 @RequestMapping("/organization")
 @Secured("ROLE_ORGANIZATION")

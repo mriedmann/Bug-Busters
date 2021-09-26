@@ -2,6 +2,7 @@ package bugbusters.everyonecodes.java.search;
 
 import java.util.Objects;
 
+// REVIEW: I like that filter idea. It could take some refactoring but the basic architecture is well done.
 public class FilterVolunteer {
     private String skills;
     private Integer rating;

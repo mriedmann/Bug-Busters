@@ -20,6 +20,7 @@ public class NotificationService {
         this.userRepository = userRepository;
     }
 
+    // REVIEW: You can use a sort-by with JPA repositories (see https://stackoverflow.com/questions/19733464/order-by-date-asc-with-spring-data)
     public List<Notification> findAllNotificationsChronologicalByUsername(String username){
         Optional<User> oUser = userRepository.findOneByUsername(username);
         if (oUser.isEmpty()) {
@@ -35,6 +36,7 @@ public class NotificationService {
             return;
         }
         User result = oResult.get();
+        // REVIEW: You are relaying on a cascaded save. I would add the user to the notification and save it to the notification repository.
         result.getNotifications().add(notification);
         userRepository.save(result);
     }

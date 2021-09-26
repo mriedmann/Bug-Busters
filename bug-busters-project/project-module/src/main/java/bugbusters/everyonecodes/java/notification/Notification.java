@@ -8,6 +8,7 @@ import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
+// REVIEW: ok
 @Entity
 public class Notification {
     @Id

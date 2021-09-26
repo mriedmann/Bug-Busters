@@ -3,6 +3,7 @@ package bugbusters.everyonecodes.java.search;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
+// REVIEW: ok
 public class FilterActivity {
     private LocalDateTime date;
     private String category;

@@ -6,6 +6,7 @@ import javax.validation.constraints.NotEmpty;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
+// REVIEW: ok
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class ActivityDTO {
 

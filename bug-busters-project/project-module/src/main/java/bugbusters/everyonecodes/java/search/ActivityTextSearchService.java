@@ -9,6 +9,7 @@ import java.util.stream.Collectors;
 @Service
 public class ActivityTextSearchService {
 
+    // REVIEW: See VolunteerTextSearchService.
     public List<Activity> searchActivitiesByText(List<Activity> inputList, String text) {
         String lowerCaseText = text.toLowerCase(Locale.ROOT);
         var inputMap = inputList.stream()

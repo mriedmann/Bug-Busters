@@ -6,6 +6,7 @@ import bugbusters.everyonecodes.java.usermanagement.data.User;
 import javax.persistence.*;
 import java.util.*;
 
+// REVIEW: OK
 @Entity
 public class Volunteer {
 

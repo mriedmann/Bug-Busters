@@ -5,6 +5,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.time.LocalDateTime;
 import java.util.List;
 
+// REVIEW: ok
 public interface ActivityRepository extends JpaRepository<Activity, Long> {
 
     List<Activity> findAllByStatusClient(Status status);

@@ -6,6 +6,7 @@ import bugbusters.everyonecodes.java.usermanagement.rolemanagement.Client;
 import javax.persistence.*;
 import java.util.Objects;
 
+// REVIEW: ok
 @Entity
 public class Organization implements Client {
 

@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+// REVIEW: Implementing this as a service seems a bit like overkill. A static utility-class might be sufficient.
 @Service
 public class SetToStringMapper {
 

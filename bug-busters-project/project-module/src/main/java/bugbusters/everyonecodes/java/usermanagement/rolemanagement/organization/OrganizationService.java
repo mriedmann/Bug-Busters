@@ -44,7 +44,9 @@ public class OrganizationService {
         Optional<Organization> oOrganization = getOrganizationByUsername(username);
         if(oOrganization.isEmpty()) return Optional.empty();
         userService.editUserData(input.getUserPrivateDTO(), username);
+        // REVIEW: This might throw an unchecked exception. If you return an optional you might want to add an isPresent check
         Organization organization = getOrganizationByUsername(username).get();
+        // REVIEW: No edit here? What is the purpose of this load/save?
         //edit properties here
         organization = organizationRepository.save(organization);
         return Optional.of(clientMapper.toClientPrivateDTO(organization));

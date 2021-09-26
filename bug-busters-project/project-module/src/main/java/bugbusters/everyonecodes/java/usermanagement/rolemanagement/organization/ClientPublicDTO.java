@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 
 import java.util.Objects;
 
+// REVIEW: ok
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class ClientPublicDTO {
 

@@ -248,6 +248,7 @@ public class ActivityService {
     public void contactVolunteerForActivity(Long activityId, String username, String creatorAuthName) {
         Optional<Activity> oResult = activityRepository.findById(activityId);
         if (oResult.isEmpty()) {
+            // REVIEW: Using your API without any error-message would be quite hard. You could think about throwing UncheckedExceptions.
             return;
         }
         Activity result = oResult.get();

@@ -5,6 +5,7 @@ import javax.validation.constraints.NotEmpty;
 import java.time.LocalDate;
 import java.util.Objects;
 
+// REVIEW: Using Private and Public DTOs is a good idea. Not that common in early stages of applications but overall a good design choice.
 public class UserPrivateDTO {
     @NotEmpty
     private String username;
@@ -59,6 +60,7 @@ public class UserPrivateDTO {
         return birthday;
     }
 
+    // REVIEW: There is a saying: YANGNI ... "you are not gonna need it". Try to avoid writing code that is not needed. Every LOC is a potential bug and has to be mantained
     public void setBirthday(LocalDate birthday) {
         this.birthday = birthday;
     }

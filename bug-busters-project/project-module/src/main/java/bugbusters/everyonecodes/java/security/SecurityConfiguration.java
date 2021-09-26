@@ -16,7 +16,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @Configuration
 @EnableGlobalMethodSecurity(securedEnabled = true)
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
-
+    // REVIEW: FYI - HTTP Basic is not really used anymore, so you would rather use a session with a login-form or
+    //         something like OAUTH2/OIDC or SAML to authenticate users. For an early prototype it's ok.
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.cors().and().csrf().disable()

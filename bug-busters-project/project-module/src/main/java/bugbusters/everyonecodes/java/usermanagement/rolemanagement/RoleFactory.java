@@ -9,6 +9,8 @@ import bugbusters.everyonecodes.java.usermanagement.rolemanagement.volunteer.Vol
 import bugbusters.everyonecodes.java.usermanagement.rolemanagement.volunteer.VolunteerRepository;
 import org.springframework.stereotype.Service;
 
+// REVIEW: All classes of the rolemanagement package seems like they should rather be in usermanagement.
+//         What was the reason to put it inside its own package?
 @Service
 public class RoleFactory {
 
@@ -22,6 +24,12 @@ public class RoleFactory {
         this.individualRepository = individualRepository;
     }
 
+    // REVIEW: I am honest with you, this looks bad, but I can't really pin it down.
+    //         First simple thing: I think that this is no correct implementation of the factory pattern.
+    //         Also, saving an object to database on factory.create is nothing that I would expect. Normally we use
+    //         Factories to only create objects, but not saving them. I think I understand your problem here and your
+    //         solution is fascinating. Maybe we can find a more "conventional" solution together.
+    //         Just as a reminder for myself: It really looks like you could have used a polymorphic approach instead.
     public void createRole(User user) {
         switch (user.getRole()) {
             case "ROLE_VOLUNTEER" -> volunteerRepository.save(new Volunteer(user));

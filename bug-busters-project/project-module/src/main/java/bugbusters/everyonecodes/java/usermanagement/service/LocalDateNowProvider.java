@@ -4,6 +4,7 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
+// REVIEW: This is perfect! Haven't seen such thing much "in the wild" but it makes UnitTesting so much easier. Well done!
 @Service
 public class LocalDateNowProvider {
 

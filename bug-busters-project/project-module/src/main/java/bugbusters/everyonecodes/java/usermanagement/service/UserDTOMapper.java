@@ -11,7 +11,7 @@ import java.util.List;
 
 @Service
 public class UserDTOMapper {
-
+    // REVIEW: provider is no good name for anything. Try to be more specific, "localDateNowProvider" if nothing better comes to mind.
     private final LocalDateNowProvider provider;
 
     public UserDTOMapper(LocalDateNowProvider provider) {
@@ -48,6 +48,8 @@ public class UserDTOMapper {
         return Period.between(birthDate, currentDate).getYears();
     }
 
+    // REVIEW: You might want to put it in its own utility class. Also, you have implemented this 3 times
+    //         (here, in activityDTO Mapper and in AdminDTOMapper). You can use a static utility class.
     public Double calculateRating(List<Integer> ratings) {
         if (ratings.size() == 0) return null;
         return ratings.stream()

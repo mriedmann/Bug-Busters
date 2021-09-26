@@ -15,6 +15,9 @@ public class AdminRunner {
         return args -> {
             String username = "admin";
             if (!userRepository.existsByUsername(username)) {
+                // REVIEW: Hardcoding the default password is not a good idea. This would make all installations of
+                //         your software prune to default-password attacks.
+                //         Better ideas: Generate a random one and write it to the log on bootup or make it configurable
                 String password = passwordEncoder.encode("Coding12#");
                 User admin = new User(
                         username,

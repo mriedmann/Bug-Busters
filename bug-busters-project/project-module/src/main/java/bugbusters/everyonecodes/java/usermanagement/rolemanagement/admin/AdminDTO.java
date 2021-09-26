@@ -2,6 +2,7 @@ package bugbusters.everyonecodes.java.usermanagement.rolemanagement.admin;
 
 import java.util.Objects;
 
+// REVIEW: From this code it looks more like a UserStatistics object. AdminDTO might not be the best name here.
 public class AdminDTO {
 
     private String username;

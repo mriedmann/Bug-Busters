@@ -21,6 +21,9 @@ public class FilterActivityService {
         this.userRepository = userRepository;
     }
 
+    // REVIEW: As far as I know the steam implementation this might be a performance nightmare but I could be wrong here.
+    //         I am no Spring expert but you might what to have a look at this: https://www.baeldung.com/spring-data-criteria-queries#specifications
+    //         Nevertheless, your implementation is quite elegant. I really like the concept.
     public List<Activity> filterSearchResults(List<Activity> searchResults, FilterActivity filterActivity){
         return searchResults.stream()
                 .filter(searchResult -> filterDate(searchResult.getStartTime(), searchResult.getEndTime(), filterActivity.getDate()))
@@ -36,6 +39,7 @@ public class FilterActivityService {
         return startDate.isBefore(inputDate) && endDate.isAfter(inputDate);
     }
 
+    // REVIEW: Why converting to a joined string and not using "skills.contains(input)"?
     private boolean filterCategories(Set<String> categories, String input) {
         if(input == null){
             return true;
@@ -66,6 +70,7 @@ public class FilterActivityService {
         var creator = userRepository.findOneByUsername(creatorName);
         if (creator.isEmpty()) return false;
         var ratings = creator.get().getRatings();
+        // REVIEW: This is a good sign that calculateRating should be in its own utility-call not in the mapper.
         Double rating = userDTOMapper.calculateRating(ratings);
         if (rating == null) return false;
         return (rating >= Double.valueOf(input));

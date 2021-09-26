@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import javax.validation.Valid;
 import java.util.Objects;
 
+// REVIEW: Could need some polymorphism ;)
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class VolunteerPublicDTO {
 

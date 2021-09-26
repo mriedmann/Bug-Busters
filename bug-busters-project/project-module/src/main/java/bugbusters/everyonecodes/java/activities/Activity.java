@@ -8,6 +8,7 @@ import javax.validation.constraints.*;
 import java.time.LocalDateTime;
 import java.util.*;
 
+// REVIEW: ok
 @Entity
 public class Activity {
     @Id

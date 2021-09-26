@@ -17,6 +17,9 @@ import org.springframework.web.server.ResponseStatusException;
 import javax.validation.Valid;
 import java.util.List;
 
+// REVIEW: I noticed that you are mixing DTO and non-DTO objects in your return types. Normally DTOs are used to build
+//         a stable API, separating it from the implementation. This makes it easier to change internal stuff without
+//         breaking other things. What was the idea behind the DTOs?
 @RestController
 @RequestMapping("/users")
 public class UserEndpoint {
@@ -66,6 +69,9 @@ public class UserEndpoint {
         volunteerService.sendDailyEmail();
     }
 
+    // REVIEW: Using strings as a return type makes your API harder to use. I would suggest wrapping it in a simple
+    //         return type, so it gets auto-serialized to JSON. Alternatively, just returning HTTP 200 without a message
+    //         is also ok, as long as you use correct error-codes.
     @Secured({"ROLE_VOLUNTEER", "ROLE_INDIVIDUAL", "ROLE_ORGANIZATION"})
     @PutMapping("/notifications/email/{schedule}")
     String registerEmailNotifications(Authentication authentication, @PathVariable String schedule) {

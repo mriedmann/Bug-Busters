@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
+// REVIEW: ok
 @RestController
 @RequestMapping("/admin")
 @Secured("ROLE_ADMIN")

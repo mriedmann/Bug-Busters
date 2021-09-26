@@ -4,6 +4,7 @@ import bugbusters.everyonecodes.java.usermanagement.rolemanagement.Client;
 import bugbusters.everyonecodes.java.usermanagement.service.UserDTOMapper;
 import org.springframework.stereotype.Service;
 
+// REVIEW: ok
 @Service
 public class ClientDTOMapper {
 

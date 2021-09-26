@@ -26,6 +26,8 @@ import java.util.stream.Collectors;
 
 @Service
 public class VolunteerService {
+    // REVIEW: Just from the look of it, this is no good sign. If a class needs that many dependencies it is very
+    //         likely that there is a structural problem in your architecture.
     private final UserService userService;
     private final VolunteerRepository volunteerRepository;
     private final OrganizationRepository organizationRepository;
@@ -60,6 +62,8 @@ public class VolunteerService {
         var oVolunteer = getVolunteerByUsername(username);
         if (oVolunteer.isEmpty()) return Optional.empty();
 
+        // REVIEW: Unused variables are quite an issue in your code-base. Which IDE are you using? IntelliJ is
+        //         showing this by default. You might want to have a look at the community edition (should be free).
         var oUser = userService.editUserData(edits.getUser(), username);
 
         oVolunteer = getVolunteerByUsername(username);
@@ -96,6 +100,7 @@ public class VolunteerService {
         return getClientByUsername(name).map(client -> clientMapper.toClientPublicDTO(client));
     }
 
+    // REVIEW: This class is quite long. Moving all mapping tasks to the endpoints or to own mapping services might make it a bit easier to read.
     public List<ActivityDTO> listAllPendingActivities() {
         return activityRepository.findAllByStatusClient(Status.PENDING).stream()
                 .map(activityDTOMapper::toVolunteerActivityDTO)
@@ -126,6 +131,7 @@ public class VolunteerService {
     }
 
     public void registerNewKeyword(String keyword, EmailSchedule schedule, String username) {
+        // REVIEW: Why not "!EmailSchedule.NONE.equals(schedule)"? Also, as a user I might assume that setting "none" disables a specific keyword notification.
         if (EmailSchedule.DAILY.equals(schedule) || EmailSchedule.WEEKLY.equals(schedule) || EmailSchedule.MONTHLY.equals(schedule)) {
             var oVolunteer = volunteerRepository.findOneByUser_username(username);
             if (oVolunteer.isPresent()) {

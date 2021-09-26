@@ -105,6 +105,7 @@ public class IndividualEndpoint {
         return individualService.listAllDraftsOfIndividual(authentication.getName());
     }
 
+    // REVIEW: You might what to have a look at OpenAPI: https://www.baeldung.com/spring-rest-openapi-documentation
     @GetMapping("/webapptree")
     String viewWebAppTree(@Value("${webapptree.individual}") String input) {
         return input;

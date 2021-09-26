@@ -31,6 +31,7 @@ public class VolunteerEndpoint {
         this.activityService = activityService;
     }
 
+    // REVIEW: The name "login" is a bit confusing here. I would suggest profile or private or something like that.
     @GetMapping("/login")
     VolunteerPrivateDTO viewVolunteerPrivateData(Authentication authentication) {
         return volunteerService.viewVolunteerPrivateData(authentication.getName()).orElse(null);
@@ -46,16 +47,30 @@ public class VolunteerEndpoint {
         return volunteerService.viewVolunteerPublicData(authentication.getName()).orElse(null);
     }
 
+    // REVIEW: Maybe this was a requirement but if you have a "whoami" endpoint, returning the currently logged-in user
+    //         you can assume that a client can access its own data using the same interfaces as other users data.
+    //         This reduces your number of endpoints and might get rid of the need to process the current user.
+    //         This also makes caching way easier which is a complex topic in big systems.
     @GetMapping("/view/{username}")
     ClientPublicDTO viewClientPublicData(@PathVariable String username) {
         return volunteerService.viewClientPublicData(username).orElse(null);
     }
 
+    // REVIEW: I personally think that simple DTO mapping calls can live in controllers (endpoints) if it has a good
+    //         reason. In your case it would reduce your number of functions significantly. Also, because you should
+    //         not use DTOs anywhere else in your code you will not have the problem that you would call your endpoints
+    //         internally (that would be a bad idea).
+    //         BUT: We used this "wrapping" in some of our products. In bigger projects we are using special mapper-services
+    //         now, if I recall correctly.
     @GetMapping("/activities/list/pending")
     List<ActivityDTO> listAllPendingActivities() {
         return volunteerService.listAllPendingActivities();
     }
 
+    // REVIEW: It is quite uncommon to present search parameters inside the url. It is a very interesting idea but
+    //         can make troubles with special characters and stuff. If you really allow "free-text" I would have used
+    //         a POST endpoint.
+    //         Also, because search is such a special topic I would think about moving all related things to its own component.
     @GetMapping("/activities/search/{text}")
     ResponseEntity<Object> searchActivitiesByText(@PathVariable String text) {
         var searchResult = volunteerService.searchPendingActivitiesByText(text);

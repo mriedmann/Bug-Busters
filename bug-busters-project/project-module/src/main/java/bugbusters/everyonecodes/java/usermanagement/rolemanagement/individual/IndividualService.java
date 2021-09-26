@@ -18,6 +18,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+// REVIEW: ok
 @Service
 public class IndividualService {
     private final VolunteerRepository volunteerRepository;

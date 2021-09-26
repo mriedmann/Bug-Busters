@@ -56,6 +56,9 @@ public class User {
 
     public User() {}
 
+    // REVIEW: I have used the lombok library quite successfully on the past to get rid of the such getter/setter nightmare classes.
+    //         It is good that you start without it (it can be a bit like black-magic) but later you might have a look
+    //         at it to make your lives easier.
     public User(String username, String password, String role, String fullName, LocalDate birthday, String address, String email, String description) {
         this.username = username;
         this.password = password;

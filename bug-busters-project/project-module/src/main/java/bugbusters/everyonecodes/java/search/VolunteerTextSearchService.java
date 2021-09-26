@@ -11,6 +11,8 @@ import java.util.stream.Collectors;
 @Service
 public class VolunteerTextSearchService {
 
+    // REVIEW: This is a function from hell. Unreadable without comments, more expressive variable-names and better formatting.
+    //         If the goal is to find volunteers by there name, skills or description you should write a custom JPA query.
     public List<Volunteer> searchVolunteersByText(List<Volunteer> inputList, String text) {
         String lowerCaseText = text.toLowerCase(Locale.ROOT);
         var inputMap = inputList.stream()

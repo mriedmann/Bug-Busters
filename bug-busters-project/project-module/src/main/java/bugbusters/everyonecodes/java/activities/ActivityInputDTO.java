@@ -6,6 +6,7 @@ import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
+// REVIEW: ok
 public class ActivityInputDTO {
     @NotEmpty
     @Size(min = 3, max = 40)

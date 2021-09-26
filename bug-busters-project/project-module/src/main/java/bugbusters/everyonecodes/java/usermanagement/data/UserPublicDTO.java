@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 
 import java.util.Objects;
 
+// REVIEW: You could try to use the new record feature of Java 14+ for DTOs (https://www.baeldung.com/java-record-keyword)
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class UserPublicDTO {
 

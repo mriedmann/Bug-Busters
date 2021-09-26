@@ -11,7 +11,7 @@ public class VolunteerSearchResultDTO {
     private String skills;
     private Double rating;
 
-
+    // REVIEW: I would assume that you need this to make auto-deserialization work. My IDE shows it as unused, so I would have added a comment, just to avoid confusion.
     public VolunteerSearchResultDTO() {}
 
     public VolunteerSearchResultDTO(String username, String skills, Double rating) {

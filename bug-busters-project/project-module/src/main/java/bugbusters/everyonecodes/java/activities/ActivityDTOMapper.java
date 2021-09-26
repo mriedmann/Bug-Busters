@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
+// REVIEW: There are a lot of redundancies, that could be refactored, but also here: Polymorphism might solve this.
 @Service
 public class ActivityDTOMapper {
 

@@ -6,10 +6,12 @@ import javax.validation.Valid;
 import javax.validation.constraints.Pattern;
 import java.util.Objects;
 
+// REVIEW: Could need some polymorphism ;)
 public class VolunteerPrivateDTO {
 
     @Valid
     private UserPrivateDTO user;
+    // REVIEW: Why no list?
     @Pattern(regexp = "^[a-zA-Z\s;]*$")
     private String skills;
 
@@ -21,6 +23,8 @@ public class VolunteerPrivateDTO {
         this.skills = skills;
     }
 
+    // REVIEW: Normally you try to keep DTOs as "flat" as possible. It is no real problem but maybe just extending
+    //         the UserPrivateDTO could also work, reducing a bit of the nesting.
     public UserPrivateDTO getUser() {
         return user;
     }

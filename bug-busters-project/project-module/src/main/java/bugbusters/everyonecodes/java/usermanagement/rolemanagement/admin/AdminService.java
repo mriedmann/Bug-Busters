@@ -51,6 +51,9 @@ public class AdminService {
                 .collect(Collectors.toList());
     }
 
+    // REVIEW: Returning object is never a good idea. The consuming client on the other side has to implement a "dispatch" logic.
+    //         If you feel the need to do something like that, this is a strong indicator that your class-model is off.
+    //         In this case it seems to be the final evidence that Volunteer, Organization and Individual are just specializations of the User class.
     public Object getAccountDataByUsername(String username) {
         Optional<Volunteer> volunteer = volunteerRepository.findOneByUser_username(username);
         Optional<Organization> organization = organizationRepository.findOneByUser_username(username);

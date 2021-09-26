@@ -3,6 +3,7 @@ package bugbusters.everyonecodes.java.usermanagement.rolemanagement.volunteer;
 import bugbusters.everyonecodes.java.usermanagement.service.UserDTOMapper;
 import org.springframework.stereotype.Service;
 
+// REVIEW: OK
 @Service
 public class VolunteerDTOMapper {
     private final UserDTOMapper userDTOMapper;
