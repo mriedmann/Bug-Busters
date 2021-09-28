@@ -3,10 +3,17 @@ package bugbusters.everyonecodes.java.usermanagement.rolemanagement.admin;
 import bugbusters.everyonecodes.java.usermanagement.data.User;
 import bugbusters.everyonecodes.java.usermanagement.repository.UserRepository;
 import org.springframework.boot.ApplicationRunner;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+@ConditionalOnProperty(
+        prefix = "application.runner",
+        value = "enabled",
+        havingValue = "true",
+        matchIfMissing = true)
 @Configuration
 public class AdminRunner {
 

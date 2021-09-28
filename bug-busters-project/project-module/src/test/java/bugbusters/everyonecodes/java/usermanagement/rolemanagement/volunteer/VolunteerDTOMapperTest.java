@@ -3,6 +3,7 @@ package bugbusters.everyonecodes.java.usermanagement.rolemanagement.volunteer;
 import bugbusters.everyonecodes.java.usermanagement.data.User;
 import bugbusters.everyonecodes.java.usermanagement.data.UserPrivateDTO;
 import bugbusters.everyonecodes.java.usermanagement.data.UserPublicDTO;
+import bugbusters.everyonecodes.java.usermanagement.data.Volunteer;
 import bugbusters.everyonecodes.java.usermanagement.service.UserDTOMapper;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -36,23 +37,23 @@ class VolunteerDTOMapperTest {
 
     @Test
     void toVolunteerPrivateDTO(){
-        Mockito.when(userDTOMapper.toUserPrivateDTO(volunteer.getUser())).thenReturn(userPrivateDTO);
+        Mockito.when(userDTOMapper.toUserPrivateDTO(volunteer)).thenReturn(userPrivateDTO);
         Mockito.when(setToStringMapper.convertToString(volunteer.getSkills())).thenReturn(skills);
         VolunteerPrivateDTO result = volunteerDTOMapper.toVolunteerPrivateDTO(volunteer);
         VolunteerPrivateDTO expected = new VolunteerPrivateDTO(userPrivateDTO, skills);
         Assertions.assertEquals(expected, result);
-        Mockito.verify(userDTOMapper).toUserPrivateDTO(volunteer.getUser());
+        Mockito.verify(userDTOMapper).toUserPrivateDTO(volunteer);
         Mockito.verify(setToStringMapper).convertToString(volunteer.getSkills());
     }
 
     @Test
     void toVolunteerPublicDTO(){
-        Mockito.when(userDTOMapper.toUserPublicDTO(volunteer.getUser())).thenReturn(userPublicDTO);
+        Mockito.when(userDTOMapper.toUserPublicDTO(volunteer)).thenReturn(userPublicDTO);
         Mockito.when(setToStringMapper.convertToString(volunteer.getSkills())).thenReturn(skills);
         VolunteerPublicDTO result = volunteerDTOMapper.toVolunteerPublicDTO(volunteer);
         VolunteerPublicDTO expected = new VolunteerPublicDTO(userPublicDTO, skills);
         Assertions.assertEquals(expected, result);
-        Mockito.verify(userDTOMapper).toUserPublicDTO(volunteer.getUser());
+        Mockito.verify(userDTOMapper).toUserPublicDTO(volunteer);
         Mockito.verify(setToStringMapper).convertToString(volunteer.getSkills());
     }
 }

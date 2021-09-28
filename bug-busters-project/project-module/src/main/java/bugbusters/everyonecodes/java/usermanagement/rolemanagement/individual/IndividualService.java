@@ -7,6 +7,8 @@ import bugbusters.everyonecodes.java.activities.Status;
 import bugbusters.everyonecodes.java.search.FilterVolunteer;
 import bugbusters.everyonecodes.java.search.FilterVolunteerService;
 import bugbusters.everyonecodes.java.search.VolunteerTextSearchService;
+import bugbusters.everyonecodes.java.usermanagement.data.Individual;
+import bugbusters.everyonecodes.java.usermanagement.data.Volunteer;
 import bugbusters.everyonecodes.java.usermanagement.rolemanagement.organization.ClientDTOMapper;
 import bugbusters.everyonecodes.java.usermanagement.rolemanagement.organization.ClientPrivateDTO;
 import bugbusters.everyonecodes.java.usermanagement.rolemanagement.organization.ClientPublicDTO;
@@ -54,7 +56,7 @@ public class IndividualService {
     }
 
     public Optional<Individual> getIndividualByUsername(String username) {
-        return individualRepository.findOneByUser_username(username);
+        return individualRepository.findOneByUsername(username);
     }
 
     public Optional<ClientPrivateDTO> viewIndividualPrivateData(String username) {
@@ -66,7 +68,7 @@ public class IndividualService {
     }
 
     public Optional<VolunteerPublicDTO> viewVolunteerPublicData(String username) {
-        return volunteerRepository.findOneByUser_username(username).map(volunteer -> volunteerMapper.toVolunteerPublicDTO(volunteer));
+        return volunteerRepository.findOneByUsername(username).map(volunteer -> volunteerMapper.toVolunteerPublicDTO(volunteer));
     }
 
     public List<VolunteerSearchResultDTO> listAllVolunteers() {

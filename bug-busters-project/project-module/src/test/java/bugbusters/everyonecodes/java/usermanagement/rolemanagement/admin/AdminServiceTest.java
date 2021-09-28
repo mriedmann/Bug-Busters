@@ -1,11 +1,11 @@
 package bugbusters.everyonecodes.java.usermanagement.rolemanagement.admin;
 
 import bugbusters.everyonecodes.java.usermanagement.data.User;
-import bugbusters.everyonecodes.java.usermanagement.rolemanagement.individual.Individual;
+import bugbusters.everyonecodes.java.usermanagement.data.Individual;
 import bugbusters.everyonecodes.java.usermanagement.rolemanagement.individual.IndividualRepository;
-import bugbusters.everyonecodes.java.usermanagement.rolemanagement.organization.Organization;
+import bugbusters.everyonecodes.java.usermanagement.data.Organization;
 import bugbusters.everyonecodes.java.usermanagement.rolemanagement.organization.OrganizationRepository;
-import bugbusters.everyonecodes.java.usermanagement.rolemanagement.volunteer.Volunteer;
+import bugbusters.everyonecodes.java.usermanagement.data.Volunteer;
 import bugbusters.everyonecodes.java.usermanagement.rolemanagement.volunteer.VolunteerRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -44,12 +44,13 @@ class AdminServiceTest {
 
     @Test
     void listAllVolunteers() {
-        Mockito.when(volunteerRepository.findAll()).thenReturn(List.of(new Volunteer(testUser)));
-        Mockito.when(mapper.toAdminDTO(testUser)).thenReturn(testAdminDTO);
+        Volunteer testVolunteer = new Volunteer(testUser);
+        Mockito.when(volunteerRepository.findAll()).thenReturn(List.of(testVolunteer));
+        Mockito.when(mapper.toAdminDTO(testVolunteer)).thenReturn(testAdminDTO);
         List<AdminDTO> result = service.listAllVolunteers();
         Assertions.assertEquals(List.of(testAdminDTO), result);
         Mockito.verify(volunteerRepository).findAll();
-        Mockito.verify(mapper).toAdminDTO(testUser);
+        Mockito.verify(mapper).toAdminDTO(testVolunteer);
     }
 
     @Test
@@ -63,12 +64,13 @@ class AdminServiceTest {
 
     @Test
     void listAllOrganizations() {
-        Mockito.when(organizationRepository.findAll()).thenReturn(List.of(new Organization(testUser)));
-        Mockito.when(mapper.toAdminDTO(testUser)).thenReturn(testAdminDTO);
+        Organization testOrganization = new Organization(testUser);
+        Mockito.when(organizationRepository.findAll()).thenReturn(List.of(testOrganization));
+        Mockito.when(mapper.toAdminDTO(testOrganization)).thenReturn(testAdminDTO);
         List<AdminDTO> result = service.listAllOrganizations();
         Assertions.assertEquals(List.of(testAdminDTO), result);
         Mockito.verify(organizationRepository).findAll();
-        Mockito.verify(mapper).toAdminDTO(testUser);
+        Mockito.verify(mapper).toAdminDTO(testOrganization);
     }
 
     @Test
@@ -82,12 +84,13 @@ class AdminServiceTest {
 
     @Test
     void listAllIndividuals() {
-        Mockito.when(individualRepository.findAll()).thenReturn(List.of(new Individual(testUser)));
-        Mockito.when(mapper.toAdminDTO(testUser)).thenReturn(testAdminDTO);
+        Individual testIndividual = new Individual(testUser);
+        Mockito.when(individualRepository.findAll()).thenReturn(List.of(testIndividual));
+        Mockito.when(mapper.toAdminDTO(testIndividual)).thenReturn(testAdminDTO);
         List<AdminDTO> result = service.listAllIndividuals();
         Assertions.assertEquals(List.of(testAdminDTO), result);
         Mockito.verify(individualRepository).findAll();
-        Mockito.verify(mapper).toAdminDTO(testUser);
+        Mockito.verify(mapper).toAdminDTO(testIndividual);
     }
 
     @Test
@@ -102,40 +105,40 @@ class AdminServiceTest {
     @Test
     void getAccountDataByUsername_Volunteer() {
         String username = "test";
-        Mockito.when(volunteerRepository.findOneByUser_username(username)).thenReturn(Optional.of(new Volunteer(testUser)));
-        Mockito.when(organizationRepository.findOneByUser_username(username)).thenReturn(Optional.empty());
-        Mockito.when(individualRepository.findOneByUser_username(username)).thenReturn(Optional.empty());
+        Mockito.when(volunteerRepository.findOneByUsername(username)).thenReturn(Optional.of(new Volunteer(testUser)));
+        Mockito.when(organizationRepository.findOneByUsername(username)).thenReturn(Optional.empty());
+        Mockito.when(individualRepository.findOneByUsername(username)).thenReturn(Optional.empty());
         Object result = service.getAccountDataByUsername(username);
         Assertions.assertEquals(new Volunteer(testUser), result);
-        Mockito.verify(volunteerRepository).findOneByUser_username(username);
-        Mockito.verify(organizationRepository).findOneByUser_username(username);
-        Mockito.verify(individualRepository).findOneByUser_username(username);
+        Mockito.verify(volunteerRepository).findOneByUsername(username);
+        Mockito.verify(organizationRepository).findOneByUsername(username);
+        Mockito.verify(individualRepository).findOneByUsername(username);
     }
 
     @Test
     void getAccountDataByUsername_Client() {
         String username = "test";
-        Mockito.when(volunteerRepository.findOneByUser_username(username)).thenReturn(Optional.empty());
-        Mockito.when(organizationRepository.findOneByUser_username(username)).thenReturn(Optional.of(new Organization(testUser)));
-        Mockito.when(individualRepository.findOneByUser_username(username)).thenReturn(Optional.empty());
+        Mockito.when(volunteerRepository.findOneByUsername(username)).thenReturn(Optional.empty());
+        Mockito.when(organizationRepository.findOneByUsername(username)).thenReturn(Optional.of(new Organization(testUser)));
+        Mockito.when(individualRepository.findOneByUsername(username)).thenReturn(Optional.empty());
         Object result = service.getAccountDataByUsername(username);
         Assertions.assertEquals(new Organization(testUser), result);
-        Mockito.verify(volunteerRepository).findOneByUser_username(username);
-        Mockito.verify(organizationRepository).findOneByUser_username(username);
-        Mockito.verify(individualRepository).findOneByUser_username(username);
+        Mockito.verify(volunteerRepository).findOneByUsername(username);
+        Mockito.verify(organizationRepository).findOneByUsername(username);
+        Mockito.verify(individualRepository).findOneByUsername(username);
     }
 
     @Test
     void getAccountDataByUsername_noMatch() {
         String username = "test";
-        Mockito.when(volunteerRepository.findOneByUser_username(username)).thenReturn(Optional.empty());
-        Mockito.when(organizationRepository.findOneByUser_username(username)).thenReturn(Optional.empty());
-        Mockito.when(individualRepository.findOneByUser_username(username)).thenReturn(Optional.empty());
+        Mockito.when(volunteerRepository.findOneByUsername(username)).thenReturn(Optional.empty());
+        Mockito.when(organizationRepository.findOneByUsername(username)).thenReturn(Optional.empty());
+        Mockito.when(individualRepository.findOneByUsername(username)).thenReturn(Optional.empty());
         Object result = service.getAccountDataByUsername(username);
         Assertions.assertNull(result);
-        Mockito.verify(volunteerRepository).findOneByUser_username(username);
-        Mockito.verify(organizationRepository).findOneByUser_username(username);
-        Mockito.verify(individualRepository).findOneByUser_username(username);
+        Mockito.verify(volunteerRepository).findOneByUsername(username);
+        Mockito.verify(organizationRepository).findOneByUsername(username);
+        Mockito.verify(individualRepository).findOneByUsername(username);
     }
 
 }

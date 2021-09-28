@@ -1,11 +1,11 @@
 package bugbusters.everyonecodes.java.usermanagement.service;
 
 import bugbusters.everyonecodes.java.usermanagement.data.User;
+import bugbusters.everyonecodes.java.usermanagement.data.UserDTO;
 import bugbusters.everyonecodes.java.usermanagement.data.UserPrivateDTO;
 import bugbusters.everyonecodes.java.usermanagement.data.UserPublicDTO;
 import bugbusters.everyonecodes.java.usermanagement.repository.UserRepository;
-import bugbusters.everyonecodes.java.usermanagement.rolemanagement.RoleFactory;
-import org.springframework.security.crypto.password.PasswordEncoder;
+import bugbusters.everyonecodes.java.usermanagement.rolemanagement.UserFactory;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -14,26 +14,22 @@ import java.util.Optional;
 public class UserService {
 
     private final UserRepository userRepository;
-    private final PasswordEncoder passwordEncoder;
     private final UserDTOMapper mapper;
-    private final RoleFactory roleFactory;
+    private final UserFactory userFactory;
 
-    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder, UserDTOMapper mapper, RoleFactory roleFactory) {
+    public UserService(UserRepository userRepository, UserDTOMapper mapper, UserFactory userFactory) {
         this.userRepository = userRepository;
-        this.passwordEncoder = passwordEncoder;
         this.mapper = mapper;
-        this.roleFactory = roleFactory;
+        this.userFactory = userFactory;
     }
 
     //regexp = "(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$^&+=])(?=\\S+$).{6,}")
     //password must contain at least 1 digit, 1 lower and upper case character, 1 special character, no whitespaces and must be at least 6 characters long
-    public User saveUser(User user) throws IllegalArgumentException {
-        if (!user.getPassword().matches("(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!?@#$^&+=/_-])(?=\\S+$).{6,100}")) throw new IllegalArgumentException();
-        String encodedPassword = passwordEncoder.encode(user.getPassword());
-        user.setPassword(encodedPassword);
-        user = userRepository.save(user);
-        roleFactory.createRole(user);
-        return user;
+    public UserDTO saveUser(UserDTO userDTO) throws IllegalArgumentException {
+        if (!userDTO.getPassword().matches("(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!?@#$^&+=/_-])(?=\\S+$).{6,100}")) throw new IllegalArgumentException();
+        User user = userFactory.createUser(userDTO);
+        userRepository.save(user);
+        return mapper.toUserDTO(user, userDTO);
     }
 
     public Optional<UserPrivateDTO> editUserData(UserPrivateDTO input, String username) {

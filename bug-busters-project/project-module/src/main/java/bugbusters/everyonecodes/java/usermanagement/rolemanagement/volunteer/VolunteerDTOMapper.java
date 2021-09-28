@@ -1,5 +1,6 @@
 package bugbusters.everyonecodes.java.usermanagement.rolemanagement.volunteer;
 
+import bugbusters.everyonecodes.java.usermanagement.data.Volunteer;
 import bugbusters.everyonecodes.java.usermanagement.service.UserDTOMapper;
 import org.springframework.stereotype.Service;
 
@@ -14,20 +15,20 @@ public class VolunteerDTOMapper {
     }
 
     public VolunteerPrivateDTO toVolunteerPrivateDTO(Volunteer input) {
-        var user = userDTOMapper.toUserPrivateDTO(input.getUser());
+        var user = userDTOMapper.toUserPrivateDTO(input);
         var skills = setToStringMapper.convertToString(input.getSkills());
         return new VolunteerPrivateDTO(user, skills);
     }
 
     public VolunteerPublicDTO toVolunteerPublicDTO(Volunteer input) {
-        var user = userDTOMapper.toUserPublicDTO(input.getUser());
+        var user = userDTOMapper.toUserPublicDTO(input);
         var skills = setToStringMapper.convertToString(input.getSkills());
         return new VolunteerPublicDTO(user, skills);
     }
 
     public VolunteerSearchResultDTO toVolunteerSearchResultDTO(Volunteer input) {
-        return new VolunteerSearchResultDTO(input.getUser().getUsername(),
+        return new VolunteerSearchResultDTO(input.getUsername(),
                 setToStringMapper.convertToString(input.getSkills()),
-                userDTOMapper.calculateRating(input.getUser().getRatings()));
+                userDTOMapper.calculateRating(input.getRatings()));
     }
 }

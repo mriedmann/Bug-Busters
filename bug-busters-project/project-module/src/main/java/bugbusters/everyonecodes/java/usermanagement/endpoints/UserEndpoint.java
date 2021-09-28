@@ -3,7 +3,7 @@ package bugbusters.everyonecodes.java.usermanagement.endpoints;
 import bugbusters.everyonecodes.java.notification.Notification;
 import bugbusters.everyonecodes.java.notification.NotificationService;
 import bugbusters.everyonecodes.java.usermanagement.data.EmailSchedule;
-import bugbusters.everyonecodes.java.usermanagement.data.User;
+import bugbusters.everyonecodes.java.usermanagement.data.UserDTO;
 import bugbusters.everyonecodes.java.usermanagement.data.UserPrivateDTO;
 import bugbusters.everyonecodes.java.usermanagement.rolemanagement.volunteer.VolunteerService;
 import bugbusters.everyonecodes.java.usermanagement.service.EmailService;
@@ -34,7 +34,7 @@ public class UserEndpoint {
     }
 
     @PostMapping("/register")
-    User registerUser(@Valid @RequestBody User user){
+    UserDTO registerUser(@Valid @RequestBody UserDTO user){
         try {
             return userService.saveUser(user);
         } catch (IllegalArgumentException e) {

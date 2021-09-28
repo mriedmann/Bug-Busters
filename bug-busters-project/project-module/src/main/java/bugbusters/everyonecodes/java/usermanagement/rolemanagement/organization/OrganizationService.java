@@ -7,6 +7,8 @@ import bugbusters.everyonecodes.java.activities.Status;
 import bugbusters.everyonecodes.java.search.FilterVolunteer;
 import bugbusters.everyonecodes.java.search.FilterVolunteerService;
 import bugbusters.everyonecodes.java.search.VolunteerTextSearchService;
+import bugbusters.everyonecodes.java.usermanagement.data.Organization;
+import bugbusters.everyonecodes.java.usermanagement.data.Volunteer;
 import bugbusters.everyonecodes.java.usermanagement.rolemanagement.volunteer.*;
 import bugbusters.everyonecodes.java.usermanagement.service.UserService;
 import org.springframework.stereotype.Service;
@@ -51,7 +53,7 @@ public class OrganizationService {
     }
 
     public Optional<Organization> getOrganizationByUsername(String username) {
-        return organizationRepository.findOneByUser_username(username);
+        return organizationRepository.findOneByUsername(username);
     }
 
     public Optional<ClientPrivateDTO> viewOrganisationPrivateData(String username) {
@@ -63,7 +65,7 @@ public class OrganizationService {
     }
 
     public Optional<VolunteerPublicDTO> viewVolunteerPublicData(String username) {
-        return volunteerRepository.findOneByUser_username(username).map(volunteer -> volunteerMapper.toVolunteerPublicDTO(volunteer));
+        return volunteerRepository.findOneByUsername(username).map(volunteer -> volunteerMapper.toVolunteerPublicDTO(volunteer));
     }
 
     public List<VolunteerSearchResultDTO> listAllVolunteers() {

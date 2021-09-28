@@ -2,7 +2,7 @@ package bugbusters.everyonecodes.java.search;
 
 
 import bugbusters.everyonecodes.java.usermanagement.data.User;
-import bugbusters.everyonecodes.java.usermanagement.rolemanagement.volunteer.Volunteer;
+import bugbusters.everyonecodes.java.usermanagement.data.Volunteer;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -41,6 +41,6 @@ public class VolunteerTextSearchService {
     }
 
     String volunteerToSearchString(Volunteer volunteer) {
-        return userToSearchString(volunteer.getUser()) + ";" + String.join(";", new HashSet<>(volunteer.getSkills())).toLowerCase(Locale.ROOT);
+        return userToSearchString(volunteer) + ";" + String.join(";", new HashSet<>(volunteer.getSkills())).toLowerCase(Locale.ROOT);
     }
 }

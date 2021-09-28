@@ -6,12 +6,13 @@ import bugbusters.everyonecodes.java.search.ActivityTextSearchService;
 import bugbusters.everyonecodes.java.search.FilterActivity;
 import bugbusters.everyonecodes.java.search.FilterActivityService;
 import bugbusters.everyonecodes.java.usermanagement.data.EmailSchedule;
+import bugbusters.everyonecodes.java.usermanagement.data.Volunteer;
 import bugbusters.everyonecodes.java.usermanagement.rolemanagement.Client;
-import bugbusters.everyonecodes.java.usermanagement.rolemanagement.individual.Individual;
+import bugbusters.everyonecodes.java.usermanagement.data.Individual;
 import bugbusters.everyonecodes.java.usermanagement.rolemanagement.individual.IndividualRepository;
 import bugbusters.everyonecodes.java.usermanagement.rolemanagement.organization.ClientDTOMapper;
 import bugbusters.everyonecodes.java.usermanagement.rolemanagement.organization.ClientPublicDTO;
-import bugbusters.everyonecodes.java.usermanagement.rolemanagement.organization.Organization;
+import bugbusters.everyonecodes.java.usermanagement.data.Organization;
 import bugbusters.everyonecodes.java.usermanagement.rolemanagement.organization.OrganizationRepository;
 import bugbusters.everyonecodes.java.usermanagement.service.EmailService;
 import bugbusters.everyonecodes.java.usermanagement.service.LocalDateNowProvider;
@@ -72,7 +73,7 @@ public class VolunteerService {
     }
 
     public Optional<Volunteer> getVolunteerByUsername(String username) {
-        return volunteerRepository.findOneByUser_username(username);
+        return volunteerRepository.findOneByUsername(username);
     }
 
     public Optional<VolunteerPrivateDTO> viewVolunteerPrivateData(String username) {
@@ -84,11 +85,11 @@ public class VolunteerService {
     }
 
     private Optional<Client> getClientByUsername(String username) {
-        Optional<Organization> oOrganization = organizationRepository.findOneByUser_username(username);
+        Optional<Organization> oOrganization = organizationRepository.findOneByUsername(username);
         if (oOrganization.isPresent()) {
             return oOrganization.map(Client.class::cast);
         }
-        Optional<Individual> oIndividual = individualRepository.findOneByUser_username(username);
+        Optional<Individual> oIndividual = individualRepository.findOneByUsername(username);
         return oIndividual.map(Client.class::cast);
     }
 
@@ -118,16 +119,16 @@ public class VolunteerService {
     }
 
     public List<ActivityDTO> listAllActivitiesOfVolunteer(String username) {
-        var oResult = volunteerRepository.findOneByUser_username(username);
+        var oResult = volunteerRepository.findOneByUsername(username);
         if(oResult.isEmpty()) return List.of();
-        return oResult.get().getUser().getActivities().stream()
+        return oResult.get().getActivities().stream()
                 .map(activityDTOMapper::toVolunteerActivityDTO)
                 .collect(Collectors.toList());
     }
 
     public void registerNewKeyword(String keyword, EmailSchedule schedule, String username) {
         if (EmailSchedule.DAILY.equals(schedule) || EmailSchedule.WEEKLY.equals(schedule) || EmailSchedule.MONTHLY.equals(schedule)) {
-            var oVolunteer = volunteerRepository.findOneByUser_username(username);
+            var oVolunteer = volunteerRepository.findOneByUsername(username);
             if (oVolunteer.isPresent()) {
                 Volunteer volunteer = oVolunteer.get();
                 volunteer.getRegisteredKeywords().put(keyword, schedule);
@@ -171,7 +172,7 @@ public class VolunteerService {
                     message = "The following Activities have been posted since the last notification for the keyword \"" + key + "\": \n\n"
                             + matchingActivitiesAsString;
                 }
-                emailService.sendListOfActivityMailForKeyword(volunteer.getUser().getEmail(), key,  message, subject);
+                emailService.sendListOfActivityMailForKeyword(volunteer.getEmail(), key,  message, subject);
             }
         }));
     }
@@ -185,7 +186,7 @@ public class VolunteerService {
     }
 
     public Map<String, EmailSchedule> viewKeywordRegistrations(String username) {
-        var oVolunteer = volunteerRepository.findOneByUser_username(username);
+        var oVolunteer = volunteerRepository.findOneByUsername(username);
         if (oVolunteer.isPresent()) {
             return oVolunteer.get().getRegisteredKeywords();
         }
@@ -193,7 +194,7 @@ public class VolunteerService {
     }
 
     public void deleteKeywordRegistration(String keyword, String username) {
-        var oVolunteer = volunteerRepository.findOneByUser_username(username);
+        var oVolunteer = volunteerRepository.findOneByUsername(username);
         if (oVolunteer.isPresent()) {
             Volunteer volunteer = oVolunteer.get();
             volunteer.getRegisteredKeywords().remove(keyword);

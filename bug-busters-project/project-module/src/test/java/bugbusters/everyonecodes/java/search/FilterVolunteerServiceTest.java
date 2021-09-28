@@ -1,7 +1,6 @@
 package bugbusters.everyonecodes.java.search;
 
-import bugbusters.everyonecodes.java.usermanagement.data.User;
-import bugbusters.everyonecodes.java.usermanagement.rolemanagement.volunteer.Volunteer;
+import bugbusters.everyonecodes.java.usermanagement.data.Volunteer;
 import bugbusters.everyonecodes.java.usermanagement.service.UserDTOMapper;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -36,31 +35,23 @@ class FilterVolunteerServiceTest {
     private static Stream<Arguments> inputParams_filterSearchResults() {
         Volunteer volunteer1 = new Volunteer();
         volunteer1.setSkills(Set.of("a", "b", "c"));
-        User user1 = new User();
-        user1.setUsername("user1");
-        user1.setRatings(List.of(5));
-        volunteer1.setUser(user1);
+        volunteer1.setUsername("user1");
+        volunteer1.setRatings(List.of(5));
 
-        Volunteer volunteer2 = new Volunteer(new User());
+        Volunteer volunteer2 = new Volunteer();
         volunteer2.setSkills(Set.of("a", "b", "d"));
-        User user2 = new User();
-        user2.setUsername("user2");
-        user2.setRatings(List.of(2));
-        volunteer2.setUser(user2);
+        volunteer2.setUsername("user2");
+        volunteer2.setRatings(List.of(2));
 
-        Volunteer volunteer3 = new Volunteer(new User());
+        Volunteer volunteer3 = new Volunteer();
         volunteer3.setSkills(Set.of("g"));
-        User user3 = new User();
-        user3.setUsername("user3");
-        user3.setRatings(List.of(3));
-        volunteer3.setUser(user3);
+        volunteer3.setUsername("user3");
+        volunteer3.setRatings(List.of(3));
 
-        Volunteer volunteer4 = new Volunteer(new User());
+        Volunteer volunteer4 = new Volunteer();
         volunteer4.setSkills(Set.of("a", "c", "d", "f"));
-        User user4 = new User();
-        user4.setUsername("user4");
-        user4.setRatings(List.of(4));
-        volunteer4.setUser(user4);
+        volunteer4.setUsername("user4");
+        volunteer4.setRatings(List.of(4));
 
         List<Volunteer> input = List.of(volunteer1, volunteer2, volunteer3, volunteer4);
 

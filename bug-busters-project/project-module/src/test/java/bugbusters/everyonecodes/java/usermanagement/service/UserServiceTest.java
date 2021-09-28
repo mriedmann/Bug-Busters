@@ -1,14 +1,16 @@
 package bugbusters.everyonecodes.java.usermanagement.service;
 
 import bugbusters.everyonecodes.java.usermanagement.data.User;
+import bugbusters.everyonecodes.java.usermanagement.data.UserDTO;
 import bugbusters.everyonecodes.java.usermanagement.data.UserPrivateDTO;
 import bugbusters.everyonecodes.java.usermanagement.data.UserPublicDTO;
 import bugbusters.everyonecodes.java.usermanagement.repository.UserRepository;
-import bugbusters.everyonecodes.java.usermanagement.rolemanagement.RoleFactory;
+import bugbusters.everyonecodes.java.usermanagement.rolemanagement.UserFactory;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
+import org.mockito.ArgumentCaptor;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -33,13 +35,18 @@ class UserServiceTest {
     UserRepository userRepository;
 
     @MockBean
-    RoleFactory roleFactory;
+    UserFactory roleFactory;
 
     @MockBean
     UserDTOMapper mapper;
 
-    private final User testUser = new User("test", "", "test", "test", LocalDate.parse("2000-01-01"), "test", "test", "test");
+    UserDTO getTestUser(String password) {
+        return new UserDTO("test", password, "ROLE_VOLUNTEER", "test", LocalDate.parse("2000-01-01"), "test", "test", "test");
+    }
 
+    User getReferenceUser(String password) {
+        return new User("test", password, "ROLE_VOLUNTEER", "test", LocalDate.parse("2000-01-01"), "test", "test", "test");
+    }
 
     //saveUser Tests
 
@@ -56,7 +63,7 @@ class UserServiceTest {
             "'testIng12§'" //Invalid Special char
     })
     void saveUser_invalidPassword(String password) {
-        testUser.setPassword(password);
+        UserDTO testUser = getTestUser(password);
         Assertions.assertThrows(IllegalArgumentException.class, () -> userService.saveUser(testUser));
     }
 
@@ -68,10 +75,13 @@ class UserServiceTest {
             "'Test1#'" //MinSize 6
     })
     void saveUser_validPassword(String password) {
-        testUser.setPassword(password);
+        UserDTO testUser = getTestUser(password);
+        User refUser = getReferenceUser(password);
         Mockito.when(passwordEncoder.encode(testUser.getPassword())).thenReturn(password);
+        Mockito.when(roleFactory.createUser(testUser)).thenReturn(refUser);
         Assertions.assertDoesNotThrow(() -> userService.saveUser(testUser));
-        Mockito.verify(userRepository, Mockito.times(1)).save(testUser);
+        ArgumentCaptor<User> argument = ArgumentCaptor.forClass(User.class);
+        Mockito.verify(userRepository, Mockito.times(1)).save(refUser);
     }
 
 
@@ -79,7 +89,7 @@ class UserServiceTest {
 
     @Test
     void editUserDataEmpty() {
-        UserPrivateDTO userChanges = new UserPrivateDTO("1", "2", "3", LocalDate.of(1999,8,10), "4", "abc@def.g", "5");
+        UserPrivateDTO userChanges = new UserPrivateDTO("1", "ROLE_VOLUNTEER", "3", LocalDate.of(1999,8,10), "4", "abc@def.g", "5");
         Mockito.when(userRepository.findOneByUsername("1")).thenReturn(Optional.empty());
         var result = userService.editUserData(userChanges, "1");
         Assertions.assertEquals(Optional.empty(), result);
@@ -88,8 +98,8 @@ class UserServiceTest {
 
     @Test
     void editUserDataFound() {
-        User oldUser = new User("1", "", "2", "3", LocalDate.of(2000, 1, 1), "4", "abcee@def.g", "test");
-        User newUser = new User("1", "", "2", "newName", LocalDate.of(1999,8,10), "newAddress", "abc@def.g", "newDescription");
+        User oldUser = new User("1", "", "ROLE_VOLUNTEER", "3", LocalDate.of(2000, 1, 1), "4", "abcee@def.g", "test");
+        User newUser = new User("1", "", "ROLE_VOLUNTEER", "newName", LocalDate.of(1999,8,10), "newAddress", "abc@def.g", "newDescription");
         UserPrivateDTO userChanges = new UserPrivateDTO("1", "2", "newName", LocalDate.of(1999,8,10), "newAddress", "abc@def.g", "newDescription");
         Mockito.when(userRepository.findOneByUsername("1")).thenReturn(Optional.of(oldUser));
         Mockito.when(mapper.toUserPrivateDTO(Mockito.any(User.class))).thenReturn(new UserPrivateDTO());
@@ -103,7 +113,7 @@ class UserServiceTest {
     @Test
     void viewUserPrivateData_UserFound() {
         String username = "username";
-        User user = new User(username, "test", "test",
+        User user = new User(username, "test", "ROLE_VOLUNTEER",
                 "test", LocalDate.of(2000, 1, 1), "test",
                 "test", "test");
         UserPrivateDTO userPrivateDTO = new UserPrivateDTO(username, user.getRole(), user.getFullName(), user.getBirthday(), user.getAddress(), user.getEmail(), user.getDescription());
@@ -141,7 +151,7 @@ class UserServiceTest {
     @Test
     void viewUserPublicData_UserFound() {
         String username = "username";
-        User user = new User(username, "test", "test",
+        User user = new User(username, "test", "ROLE_VOLUNTEER",
                 "test", LocalDate.of(2000, 1, 1), "test",
                 "test", "test");
         UserPublicDTO userPublicDTO = new UserPublicDTO(username, "test", 1, "test", null, 0);

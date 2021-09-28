@@ -1,6 +1,6 @@
 package bugbusters.everyonecodes.java.usermanagement.endpoints;
 
-import bugbusters.everyonecodes.java.usermanagement.data.User;
+import bugbusters.everyonecodes.java.usermanagement.data.UserDTO;
 import bugbusters.everyonecodes.java.usermanagement.service.UserService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -31,7 +31,7 @@ class UserEndpointTest {
 
     @Test
     void registerUser_invalidPassword() {
-        User testUser = new User ("Test",
+        UserDTO testUser = new UserDTO ("Test",
                 "invalidPassword",
                 "ROLE_TEST",
                 "Test Test",
@@ -40,15 +40,15 @@ class UserEndpointTest {
                 "test.test@bugbusters.com",
                 null);
         Mockito.when(userService.saveUser(testUser)).thenThrow(IllegalArgumentException.class);
-        ResponseEntity<User> resultResponseEntity = testRestTemplate.postForEntity(url + "/register", testUser, User.class);
+        ResponseEntity<UserDTO> resultResponseEntity = testRestTemplate.postForEntity(url + "/register", testUser, UserDTO.class);
         HttpStatus statusCode = resultResponseEntity.getStatusCode();
         Assertions.assertEquals(HttpStatus.BAD_REQUEST, statusCode);
-        Mockito.verify(userService, Mockito.times(1)).saveUser(testUser);
+        Mockito.verify(userService, Mockito.times(1)).saveUser(Mockito.any(UserDTO.class));
     }
 
     @Test
     void registerUser_validationFailed() {
-        User testUser = new User ("Test",
+        UserDTO testUser = new UserDTO ("Test",
                 "validPassword1#",
                 null,
                 null,
@@ -56,15 +56,15 @@ class UserEndpointTest {
                 null,
                 null,
                 null);
-        ResponseEntity<User> resultResponseEntity = testRestTemplate.postForEntity(url + "/register", testUser, User.class);
+        ResponseEntity<UserDTO> resultResponseEntity = testRestTemplate.postForEntity(url + "/register", testUser, UserDTO.class);
         HttpStatus statusCode = resultResponseEntity.getStatusCode();
         Assertions.assertEquals(HttpStatus.BAD_REQUEST, statusCode);
-        Mockito.verify(userService, Mockito.never()).saveUser(Mockito.any(User.class));
+        Mockito.verify(userService, Mockito.never()).saveUser(Mockito.any(UserDTO.class));
     }
 
     @Test
     void registerUser_invalidEmail() {
-        User testUser = new User ("Test",
+        UserDTO testUser = new UserDTO ("Test",
                 "validPassword1#",
                 "ROLE_TEST",
                 "Test Test",
@@ -72,15 +72,15 @@ class UserEndpointTest {
                 null,
                 "totallyValidEmail",
                 null);
-        ResponseEntity<User> resultResponseEntity = testRestTemplate.postForEntity(url + "/register", testUser, User.class);
+        ResponseEntity<UserDTO> resultResponseEntity = testRestTemplate.postForEntity(url + "/register", testUser, UserDTO.class);
         HttpStatus statusCode = resultResponseEntity.getStatusCode();
         Assertions.assertEquals(HttpStatus.BAD_REQUEST, statusCode);
-        Mockito.verify(userService, Mockito.never()).saveUser(Mockito.any(User.class));
+        Mockito.verify(userService, Mockito.never()).saveUser(Mockito.any(UserDTO.class));
     }
 
     @Test
     void registerUser_validNewUser() {
-        User testUser = new User ("Test",
+        UserDTO testUser = new UserDTO ("Test",
                 "validPassword1#",
                 "ROLE_TEST",
                 "Test Test",
@@ -89,8 +89,8 @@ class UserEndpointTest {
                 "test.test@bugbusters.com",
                 null);
         Mockito.when(userService.saveUser(testUser)).thenReturn(testUser);
-        ResponseEntity<User> resultResponseEntity = testRestTemplate.postForEntity(url + "/register", testUser, User.class);
-        User result = resultResponseEntity.getBody();
+        ResponseEntity<UserDTO> resultResponseEntity = testRestTemplate.postForEntity(url + "/register", testUser, UserDTO.class);
+        UserDTO result = resultResponseEntity.getBody();
         HttpStatus resultStatusCode = resultResponseEntity.getStatusCode();
         Assertions.assertEquals(testUser, result);
         Assertions.assertEquals(HttpStatus.OK, resultStatusCode);

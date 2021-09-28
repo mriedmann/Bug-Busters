@@ -1,5 +1,6 @@
 package bugbusters.everyonecodes.java.usermanagement.service;
 
+import bugbusters.everyonecodes.java.usermanagement.data.UserDTO;
 import bugbusters.everyonecodes.java.usermanagement.data.UserPrivateDTO;
 import bugbusters.everyonecodes.java.usermanagement.data.UserPublicDTO;
 import bugbusters.everyonecodes.java.usermanagement.data.User;
@@ -42,6 +43,28 @@ public class UserDTOMapper {
         List<Integer> ratings = user.getRatings();
         Double rating = calculateRating(ratings);
         return new UserPublicDTO(user.getUsername(), user.getFullName(), age, user.getDescription(), rating, user.getExperience());
+    }
+
+    public User fromUserDTO(UserDTO userDTO, User user) {
+        user.setUsername(userDTO.getUsername());
+        user.setRole(userDTO.getRole());
+        user.setFullName(userDTO.getFullName());
+        user.setBirthday(userDTO.getBirthday());
+        user.setAddress(userDTO.getAddress());
+        user.setEmail(userDTO.getEmail());
+        user.setDescription(userDTO.getDescription());
+        return user;
+    }
+
+    public UserDTO toUserDTO(User user, UserDTO userDTO) {
+        userDTO.setUsername(user.getUsername());
+        userDTO.setRole(user.getRole());
+        userDTO.setFullName(user.getFullName());
+        userDTO.setBirthday(user.getBirthday());
+        userDTO.setAddress(user.getAddress());
+        userDTO.setEmail(user.getEmail());
+        userDTO.setDescription(user.getDescription());
+        return userDTO;
     }
 
     Integer calculateAge(LocalDate birthDate, LocalDate currentDate) {

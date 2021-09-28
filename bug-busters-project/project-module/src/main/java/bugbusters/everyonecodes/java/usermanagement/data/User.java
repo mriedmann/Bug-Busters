@@ -14,10 +14,11 @@ import java.util.List;
 import java.util.Objects;
 
 @Entity
+@Inheritance(strategy = InheritanceType.JOINED)
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    protected Long id;
 
     @NotEmpty
     @Column(unique=true)
@@ -169,6 +170,17 @@ public class User {
 
     public void setEmailSchedule(EmailSchedule emailSchedule) {
         this.emailSchedule = emailSchedule;
+    }
+
+    public void setUser(User user) {
+        this.setUsername(user.getUsername());
+        this.setPassword(user.getPassword());
+        this.setRole(user.getRole());
+        this.setFullName(user.getFullName());
+        this.setBirthday(user.getBirthday());
+        this.setAddress(user.getAddress());
+        this.setEmail(user.getEmail());
+        this.setDescription(user.getDescription());
     }
 
     @Override

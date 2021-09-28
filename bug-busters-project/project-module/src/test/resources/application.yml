@@ -26,3 +26,7 @@ webapptree:
   volunteer: "abc"
   individual: "def"
   organization: "geh"
+
+application:
+  runner:
+    enabled: false

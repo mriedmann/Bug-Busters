@@ -2,9 +2,7 @@ package bugbusters.everyonecodes.java.usermanagement.rolemanagement.individual;
 
 import bugbusters.everyonecodes.java.activities.*;
 import bugbusters.everyonecodes.java.search.VolunteerTextSearchService;
-import bugbusters.everyonecodes.java.usermanagement.data.User;
-import bugbusters.everyonecodes.java.usermanagement.data.UserPrivateDTO;
-import bugbusters.everyonecodes.java.usermanagement.data.UserPublicDTO;
+import bugbusters.everyonecodes.java.usermanagement.data.*;
 import bugbusters.everyonecodes.java.usermanagement.rolemanagement.organization.ClientDTOMapper;
 import bugbusters.everyonecodes.java.usermanagement.rolemanagement.organization.ClientPrivateDTO;
 import bugbusters.everyonecodes.java.usermanagement.rolemanagement.organization.ClientPublicDTO;
@@ -71,70 +69,70 @@ class IndividualServiceTest {
     @Test
     void getIndividualByUsername() {
         individualService.getIndividualByUsername(username);
-        Mockito.verify(individualRepository).findOneByUser_username(username);
+        Mockito.verify(individualRepository).findOneByUsername(username);
     }
 
     @Test
     void viewIndividualPrivateData_UserFound() {
-        Mockito.when(individualRepository.findOneByUser_username(username)).thenReturn(Optional.of(individual));
+        Mockito.when(individualRepository.findOneByUsername(username)).thenReturn(Optional.of(individual));
         Mockito.when(clientMapper.toClientPrivateDTO(individual)).thenReturn(new ClientPrivateDTO(userPrivateDTO));
         var oResult = individualService.viewIndividualPrivateData(username);
         Assertions.assertEquals(Optional.of(new ClientPrivateDTO(userPrivateDTO)), oResult);
-        Mockito.verify(individualRepository, Mockito.times(1)).findOneByUser_username(username);
+        Mockito.verify(individualRepository, Mockito.times(1)).findOneByUsername(username);
         Mockito.verify(clientMapper, Mockito.times(1)).toClientPrivateDTO(individual);
     }
 
     @Test
     void viewIndividualPrivateData_UserNotFound() {
-        Mockito.when(individualRepository.findOneByUser_username(username)).thenReturn(Optional.empty());
+        Mockito.when(individualRepository.findOneByUsername(username)).thenReturn(Optional.empty());
         var oResult = individualService.viewIndividualPrivateData(username);
         Assertions.assertEquals(Optional.empty(), oResult);
-        Mockito.verify(individualRepository, Mockito.times(1)).findOneByUser_username(username);
+        Mockito.verify(individualRepository, Mockito.times(1)).findOneByUsername(username);
         Mockito.verify(clientMapper, Mockito.never()).toClientPrivateDTO(Mockito.any(Individual.class));
     }
 
     @Test
     void viewIndividualPublicData_UserFound() {
-        Mockito.when(individualRepository.findOneByUser_username(username)).thenReturn(Optional.of(individual));
+        Mockito.when(individualRepository.findOneByUsername(username)).thenReturn(Optional.of(individual));
         Mockito.when(clientMapper.toClientPublicDTO(individual)).thenReturn(new ClientPublicDTO(userPublicDTO));
         var oResult = individualService.viewIndividualPublicData(username);
         Assertions.assertEquals(Optional.of(new ClientPublicDTO(userPublicDTO)), oResult);
-        Mockito.verify(individualRepository, Mockito.times(1)).findOneByUser_username(username);
+        Mockito.verify(individualRepository, Mockito.times(1)).findOneByUsername(username);
         Mockito.verify(clientMapper, Mockito.times(1)).toClientPublicDTO(individual);
     }
 
     @Test
     void viewIndividualPublicData_UserNotFound() {
-        Mockito.when(individualRepository.findOneByUser_username(username)).thenReturn(Optional.empty());
+        Mockito.when(individualRepository.findOneByUsername(username)).thenReturn(Optional.empty());
         var oResult = individualService.viewIndividualPublicData(username);
         Assertions.assertEquals(Optional.empty(), oResult);
-        Mockito.verify(individualRepository, Mockito.times(1)).findOneByUser_username(username);
+        Mockito.verify(individualRepository, Mockito.times(1)).findOneByUsername(username);
         Mockito.verify(clientMapper, Mockito.never()).toClientPublicDTO(Mockito.any(Individual.class));
     }
 
     @Test
     void viewVolunteerPublicData_UserFound() {
-        Mockito.when(volunteerRepository.findOneByUser_username(username)).thenReturn(Optional.of(volunteer));
+        Mockito.when(volunteerRepository.findOneByUsername(username)).thenReturn(Optional.of(volunteer));
         Mockito.when(volunteerMapper.toVolunteerPublicDTO(volunteer)).thenReturn(new VolunteerPublicDTO(userPublicDTO, "skills"));
         var oResult = individualService.viewVolunteerPublicData(username);
         Assertions.assertEquals(Optional.of(new VolunteerPublicDTO(userPublicDTO, "skills")), oResult);
-        Mockito.verify(volunteerRepository, Mockito.times(1)).findOneByUser_username(username);
+        Mockito.verify(volunteerRepository, Mockito.times(1)).findOneByUsername(username);
         Mockito.verify(volunteerMapper, Mockito.times(1)).toVolunteerPublicDTO(volunteer);
     }
 
     @Test
     void viewVolunteerPublicData_UserNotFound() {
-        Mockito.when(volunteerRepository.findOneByUser_username(username)).thenReturn(Optional.empty());
+        Mockito.when(volunteerRepository.findOneByUsername(username)).thenReturn(Optional.empty());
         var oResult = individualService.viewVolunteerPublicData(username);
         Assertions.assertEquals(Optional.empty(), oResult);
-        Mockito.verify(volunteerRepository, Mockito.times(1)).findOneByUser_username(username);
+        Mockito.verify(volunteerRepository, Mockito.times(1)).findOneByUsername(username);
         Mockito.verify(volunteerMapper, Mockito.never()).toVolunteerPublicDTO(Mockito.any(Volunteer.class));
     }
 
     @Test
     void editIndividualData_DataFound() {
         ClientPrivateDTO clientPrivateDTO = new ClientPrivateDTO(userPrivateDTO);
-        Mockito.when(individualRepository.findOneByUser_username(username)).thenReturn(Optional.of(individual));
+        Mockito.when(individualRepository.findOneByUsername(username)).thenReturn(Optional.of(individual));
         Mockito.when(individualRepository.save(individual)).thenReturn(individual);
         Mockito.when(clientMapper.toClientPrivateDTO(individual)).thenReturn(clientPrivateDTO);
         var oResult = individualService.editIndividualData(clientPrivateDTO, username);
@@ -145,7 +143,7 @@ class IndividualServiceTest {
 
     @Test
     void editIndividualData_Empty() {
-        Mockito.when(individualRepository.findOneByUser_username(username)).thenReturn(Optional.empty());
+        Mockito.when(individualRepository.findOneByUsername(username)).thenReturn(Optional.empty());
         var oResult = individualService.editIndividualData(new ClientPrivateDTO(userPrivateDTO), username);
         Assertions.assertEquals(Optional.empty(), oResult);
         Mockito.verify(individualRepository, Mockito.never()).save(Mockito.any(Individual.class));

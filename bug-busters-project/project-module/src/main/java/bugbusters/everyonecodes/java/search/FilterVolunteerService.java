@@ -1,6 +1,6 @@
 package bugbusters.everyonecodes.java.search;
 
-import bugbusters.everyonecodes.java.usermanagement.rolemanagement.volunteer.Volunteer;
+import bugbusters.everyonecodes.java.usermanagement.data.Volunteer;
 import bugbusters.everyonecodes.java.usermanagement.service.UserDTOMapper;
 import org.springframework.stereotype.Service;
 
@@ -19,7 +19,7 @@ public class FilterVolunteerService {
     public List<Volunteer> filterSearchResults(List<Volunteer> searchResults, FilterVolunteer filterVolunteer){
         return searchResults.stream()
                 .filter(searchResult -> filterSkills(searchResult.getSkills(), filterVolunteer.getSkills()))
-                .filter(searchResult -> filterRating(searchResult.getUser().getRatings(), filterVolunteer.getRating()))
+                .filter(searchResult -> filterRating(searchResult.getRatings(), filterVolunteer.getRating()))
                 .collect(Collectors.toList());
     }
 

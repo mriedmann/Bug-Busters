@@ -1,10 +1,10 @@
 package bugbusters.everyonecodes.java.usermanagement.rolemanagement.admin;
 
-import bugbusters.everyonecodes.java.usermanagement.rolemanagement.individual.Individual;
+import bugbusters.everyonecodes.java.usermanagement.data.Individual;
 import bugbusters.everyonecodes.java.usermanagement.rolemanagement.individual.IndividualRepository;
-import bugbusters.everyonecodes.java.usermanagement.rolemanagement.organization.Organization;
+import bugbusters.everyonecodes.java.usermanagement.data.Organization;
 import bugbusters.everyonecodes.java.usermanagement.rolemanagement.organization.OrganizationRepository;
-import bugbusters.everyonecodes.java.usermanagement.rolemanagement.volunteer.Volunteer;
+import bugbusters.everyonecodes.java.usermanagement.data.Volunteer;
 import bugbusters.everyonecodes.java.usermanagement.rolemanagement.volunteer.VolunteerRepository;
 import org.springframework.stereotype.Service;
 
@@ -33,7 +33,7 @@ public class AdminService {
     public List<AdminDTO> listAllVolunteers() {
         List<Volunteer> volunteers = volunteerRepository.findAll();
         return volunteers.stream()
-                .map(e -> mapper.toAdminDTO(e.getUser()))
+                .map(e -> mapper.toAdminDTO(e))
                 .collect(Collectors.toList());
     }
 
@@ -52,9 +52,9 @@ public class AdminService {
     }
 
     public Object getAccountDataByUsername(String username) {
-        Optional<Volunteer> volunteer = volunteerRepository.findOneByUser_username(username);
-        Optional<Organization> organization = organizationRepository.findOneByUser_username(username);
-        Optional<Individual> individual = individualRepository.findOneByUser_username(username);
+        Optional<Volunteer> volunteer = volunteerRepository.findOneByUsername(username);
+        Optional<Organization> organization = organizationRepository.findOneByUsername(username);
+        Optional<Individual> individual = individualRepository.findOneByUsername(username);
         if (volunteer.isPresent()) {
             return volunteer.get();
         }
