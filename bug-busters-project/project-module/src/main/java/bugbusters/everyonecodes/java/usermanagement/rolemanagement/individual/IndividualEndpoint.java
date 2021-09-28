@@ -52,6 +52,8 @@ public class IndividualEndpoint {
         return individualService.viewVolunteerPublicData(username).orElse(null);
     }
 
+    // REVIEW: Dumping the whole table without pagination can lead to serious problems on both sides.
+    //         This is fine for a prototype but please keep this in mind.
     @GetMapping("/view/volunteers")
     List<VolunteerSearchResultDTO> listAllVolunteers() {
         return individualService.listAllVolunteers();

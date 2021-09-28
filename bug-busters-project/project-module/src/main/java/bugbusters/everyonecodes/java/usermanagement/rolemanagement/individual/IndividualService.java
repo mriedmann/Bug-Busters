@@ -66,6 +66,7 @@ public class IndividualService {
         return getIndividualByUsername(username).map(organization -> clientMapper.toClientPublicDTO(organization));
     }
 
+    // REVIEW: Are these in the right service?
     public Optional<VolunteerPublicDTO> viewVolunteerPublicData(String username) {
         return volunteerRepository.findOneByUser_username(username).map(volunteer -> volunteerMapper.toVolunteerPublicDTO(volunteer));
     }

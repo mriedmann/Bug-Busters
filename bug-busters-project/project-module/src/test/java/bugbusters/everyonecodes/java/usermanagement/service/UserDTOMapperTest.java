@@ -85,6 +85,7 @@ class UserDTOMapperTest {
         LocalDate birthday = LocalDate.of(1967, 8, 10);
         String description = "description";
         List<Integer> ratings = List.of(2, 4, 4);
+        // REVIEW: I would suggest that you do not rely on your implementations to generate test-data. Just add it as fixed value, or rely on a std-lib function.
         Double rating = userDTOMapper.calculateRating(ratings);
         User user = new User(username, "password", "role",
                 fullName, birthday, "address", "email", description);

@@ -33,6 +33,7 @@ class FilterVolunteerServiceTest {
         Assertions.assertEquals(expected, result);
     }
 
+    // REVIEW: You are only testing single-value ratings here, so you are not really checking if your average-calc works.
     private static Stream<Arguments> inputParams_filterSearchResults() {
         Volunteer volunteer1 = new Volunteer();
         volunteer1.setSkills(Set.of("a", "b", "c"));
