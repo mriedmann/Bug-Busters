@@ -4,7 +4,7 @@ import bugbusters.everyonecodes.java.notification.Notification;
 import bugbusters.everyonecodes.java.notification.NotificationService;
 import bugbusters.everyonecodes.java.usermanagement.data.User;
 import bugbusters.everyonecodes.java.usermanagement.repository.UserRepository;
-import bugbusters.everyonecodes.java.usermanagement.rolemanagement.volunteer.SetToStringMapper;
+import bugbusters.everyonecodes.java.usermanagement.service.SetToStringMapper;
 import bugbusters.everyonecodes.java.usermanagement.service.LocalDateNowProvider;
 import org.springframework.stereotype.Service;
 

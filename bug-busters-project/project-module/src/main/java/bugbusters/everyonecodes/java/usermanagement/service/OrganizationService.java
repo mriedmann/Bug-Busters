@@ -1,4 +1,4 @@
-package bugbusters.everyonecodes.java.usermanagement.rolemanagement.organization;
+package bugbusters.everyonecodes.java.usermanagement.service;
 
 import bugbusters.everyonecodes.java.activities.ActivityDTO;
 import bugbusters.everyonecodes.java.activities.ActivityDTOMapper;
@@ -7,10 +7,9 @@ import bugbusters.everyonecodes.java.activities.Status;
 import bugbusters.everyonecodes.java.search.FilterVolunteer;
 import bugbusters.everyonecodes.java.search.FilterVolunteerService;
 import bugbusters.everyonecodes.java.search.VolunteerTextSearchService;
-import bugbusters.everyonecodes.java.usermanagement.data.Organization;
-import bugbusters.everyonecodes.java.usermanagement.data.Volunteer;
-import bugbusters.everyonecodes.java.usermanagement.rolemanagement.volunteer.*;
-import bugbusters.everyonecodes.java.usermanagement.service.UserService;
+import bugbusters.everyonecodes.java.usermanagement.data.*;
+import bugbusters.everyonecodes.java.usermanagement.repository.OrganizationRepository;
+import bugbusters.everyonecodes.java.usermanagement.repository.VolunteerRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -23,18 +22,18 @@ public class OrganizationService {
     private final OrganizationRepository organizationRepository;
     private final UserService userService;
     private final VolunteerRepository volunteerRepository;
-    private final ClientDTOMapper clientMapper;
+    private final UserDTOMapper userMapper;
     private final VolunteerDTOMapper volunteerMapper;
     private final VolunteerTextSearchService volunteerTextSearchService;
     private final ActivityDTOMapper activityDTOMapper;
     private final ActivityRepository activityRepository;
     private final FilterVolunteerService filterVolunteerService;
 
-    public OrganizationService(OrganizationRepository organizationRepository, UserService userService, VolunteerRepository volunteerRepository, ClientDTOMapper clientMapper, VolunteerDTOMapper volunteerMapper, VolunteerTextSearchService volunteerTextSearchService, ActivityDTOMapper activityDTOMapper, ActivityRepository activityRepository, FilterVolunteerService filterVolunteerService) {
+    public OrganizationService(OrganizationRepository organizationRepository, UserService userService, VolunteerRepository volunteerRepository, UserDTOMapper userMapper, VolunteerDTOMapper volunteerMapper, VolunteerTextSearchService volunteerTextSearchService, ActivityDTOMapper activityDTOMapper, ActivityRepository activityRepository, FilterVolunteerService filterVolunteerService) {
         this.organizationRepository = organizationRepository;
         this.userService = userService;
         this.volunteerRepository = volunteerRepository;
-        this.clientMapper = clientMapper;
+        this.userMapper = userMapper;
         this.volunteerMapper = volunteerMapper;
         this.volunteerTextSearchService = volunteerTextSearchService;
         this.activityDTOMapper = activityDTOMapper;
@@ -42,26 +41,26 @@ public class OrganizationService {
         this.filterVolunteerService = filterVolunteerService;
     }
 
-    public Optional<ClientPrivateDTO> editOrganizationData(ClientPrivateDTO input, String username) {
+    public Optional<UserPrivateDTO> editOrganizationData(UserPrivateDTO input, String username) {
         Optional<Organization> oOrganization = getOrganizationByUsername(username);
         if(oOrganization.isEmpty()) return Optional.empty();
-        userService.editUserData(input.getUserPrivateDTO(), username);
+        userService.editUserData(input, username);
         Organization organization = getOrganizationByUsername(username).get();
         //edit properties here
         organization = organizationRepository.save(organization);
-        return Optional.of(clientMapper.toClientPrivateDTO(organization));
+        return Optional.of(userMapper.toUserPrivateDTO(organization));
     }
 
     public Optional<Organization> getOrganizationByUsername(String username) {
         return organizationRepository.findOneByUsername(username);
     }
 
-    public Optional<ClientPrivateDTO> viewOrganisationPrivateData(String username) {
-        return getOrganizationByUsername(username).map(organization -> clientMapper.toClientPrivateDTO(organization));
+    public Optional<UserPrivateDTO> viewOrganisationPrivateData(String username) {
+        return getOrganizationByUsername(username).map(organization -> userMapper.toUserPrivateDTO(organization));
     }
 
-    public Optional<ClientPublicDTO> viewOrganisationPublicData(String username) {
-        return getOrganizationByUsername(username).map(organization -> clientMapper.toClientPublicDTO(organization));
+    public Optional<UserPublicDTO> viewOrganisationPublicData(String username) {
+        return getOrganizationByUsername(username).map(organization -> userMapper.toUserPublicDTO(organization));
     }
 
     public Optional<VolunteerPublicDTO> viewVolunteerPublicData(String username) {

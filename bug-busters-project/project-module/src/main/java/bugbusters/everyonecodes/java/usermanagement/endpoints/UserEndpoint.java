@@ -5,7 +5,7 @@ import bugbusters.everyonecodes.java.notification.NotificationService;
 import bugbusters.everyonecodes.java.usermanagement.data.EmailSchedule;
 import bugbusters.everyonecodes.java.usermanagement.data.UserDTO;
 import bugbusters.everyonecodes.java.usermanagement.data.UserPrivateDTO;
-import bugbusters.everyonecodes.java.usermanagement.rolemanagement.volunteer.VolunteerService;
+import bugbusters.everyonecodes.java.usermanagement.service.VolunteerService;
 import bugbusters.everyonecodes.java.usermanagement.service.EmailService;
 import bugbusters.everyonecodes.java.usermanagement.service.UserService;
 import org.springframework.http.HttpStatus;

@@ -85,9 +85,10 @@ class UserDTOMapperTest {
         LocalDate birthday = LocalDate.of(1967, 8, 10);
         String description = "description";
         List<Integer> ratings = List.of(2, 4, 4);
-        Double rating = userDTOMapper.calculateRating(ratings);
+        Double rating = RatingCalcUtil.calculateRating(ratings);
         User user = new User(username, "password", "role",
                 fullName, birthday, "address", "email", description);
+        user.setRatings(ratings);
         UserPublicDTO result = userDTOMapper.toUserPublicDTO(user);
         UserPublicDTO expected = new UserPublicDTO(username, fullName, 53, description, rating, 0);
         Assertions.assertEquals(expected, result);
@@ -141,14 +142,14 @@ class UserDTOMapperTest {
     @Test
     void calculateRating_emptyList() {
         List<Integer> input = List.of();
-        Double result = userDTOMapper.calculateRating(input);
+        Double result = RatingCalcUtil.calculateRating(input);
         Assertions.assertNull(result);
     }
 
     @ParameterizedTest
     @MethodSource("parameters_calculateRating")
     void calculateRating_ListWithElements(List<Integer> input, Double expected) {
-        Double result = userDTOMapper.calculateRating(input);
+        Double result = RatingCalcUtil.calculateRating(input);
         Assertions.assertEquals(expected, result, 0.0000001);
     }
 

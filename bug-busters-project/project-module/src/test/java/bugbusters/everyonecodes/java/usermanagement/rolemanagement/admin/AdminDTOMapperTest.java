@@ -2,7 +2,9 @@ package bugbusters.everyonecodes.java.usermanagement.rolemanagement.admin;
 
 import bugbusters.everyonecodes.java.activities.Activity;
 import bugbusters.everyonecodes.java.activities.Status;
+import bugbusters.everyonecodes.java.usermanagement.data.AdminDTO;
 import bugbusters.everyonecodes.java.usermanagement.data.User;
+import bugbusters.everyonecodes.java.usermanagement.service.AdminDTOMapper;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +12,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Set;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.NONE)
 class AdminDTOMapperTest {

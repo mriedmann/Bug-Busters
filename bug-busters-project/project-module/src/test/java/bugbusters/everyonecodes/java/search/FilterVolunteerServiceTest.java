@@ -6,7 +6,6 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
-import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -27,7 +26,6 @@ class FilterVolunteerServiceTest {
     @ParameterizedTest
     @MethodSource("inputParams_filterSearchResults")
     void filterSearchResults(List<Volunteer> searchResults, FilterVolunteer filterVolunteer, List<Volunteer> expected) {
-        Mockito.when(userDTOMapper.calculateRating(Mockito.anyList())).thenCallRealMethod();
         List<Volunteer> result = filterVolunteerService.filterSearchResults(searchResults, filterVolunteer);
         Assertions.assertEquals(expected, result);
     }

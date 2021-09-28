@@ -1,4 +1,4 @@
-package bugbusters.everyonecodes.java.usermanagement.rolemanagement.volunteer;
+package bugbusters.everyonecodes.java.usermanagement.service;
 
 import org.springframework.stereotype.Service;
 

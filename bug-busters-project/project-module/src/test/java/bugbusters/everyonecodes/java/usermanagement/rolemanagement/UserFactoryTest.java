@@ -1,16 +1,11 @@
 package bugbusters.everyonecodes.java.usermanagement.rolemanagement;
 
+import bugbusters.everyonecodes.java.usermanagement.UserFactory;
 import bugbusters.everyonecodes.java.usermanagement.data.*;
-import bugbusters.everyonecodes.java.usermanagement.rolemanagement.individual.IndividualRepository;
-import bugbusters.everyonecodes.java.usermanagement.rolemanagement.organization.OrganizationRepository;
-import bugbusters.everyonecodes.java.usermanagement.rolemanagement.volunteer.VolunteerRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
-
-import static org.mockito.Mockito.*;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.NONE)
 class UserFactoryTest {

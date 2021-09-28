@@ -1,7 +1,7 @@
 package bugbusters.everyonecodes.java.search;
 
 import bugbusters.everyonecodes.java.usermanagement.data.Volunteer;
-import bugbusters.everyonecodes.java.usermanagement.service.UserDTOMapper;
+import bugbusters.everyonecodes.java.usermanagement.service.RatingCalcUtil;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -10,11 +10,6 @@ import java.util.stream.Collectors;
 
 @Service
 public class FilterVolunteerService {
-    private final UserDTOMapper userDTOMapper;
-
-    public FilterVolunteerService(UserDTOMapper userDTOMapper) {
-        this.userDTOMapper = userDTOMapper;
-    }
 
     public List<Volunteer> filterSearchResults(List<Volunteer> searchResults, FilterVolunteer filterVolunteer){
         return searchResults.stream()
@@ -34,7 +29,7 @@ public class FilterVolunteerService {
         if(input == null){
             return true;
         }
-        Double rating = userDTOMapper.calculateRating(ratings);
+        Double rating = RatingCalcUtil.calculateRating(ratings);
         if (rating == null) return false;
         return (rating >= Double.valueOf(input));
     }

@@ -2,6 +2,7 @@ package bugbusters.everyonecodes.java.search;
 
 import bugbusters.everyonecodes.java.activities.Activity;
 import bugbusters.everyonecodes.java.usermanagement.repository.UserRepository;
+import bugbusters.everyonecodes.java.usermanagement.service.RatingCalcUtil;
 import bugbusters.everyonecodes.java.usermanagement.service.UserDTOMapper;
 import org.springframework.stereotype.Service;
 
@@ -66,7 +67,7 @@ public class FilterActivityService {
         var creator = userRepository.findOneByUsername(creatorName);
         if (creator.isEmpty()) return false;
         var ratings = creator.get().getRatings();
-        Double rating = userDTOMapper.calculateRating(ratings);
+        Double rating = RatingCalcUtil.calculateRating(ratings);
         if (rating == null) return false;
         return (rating >= Double.valueOf(input));
     }

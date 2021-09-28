@@ -1,8 +1,10 @@
 package bugbusters.everyonecodes.java.usermanagement.rolemanagement.volunteer;
 
 import bugbusters.everyonecodes.java.activities.ActivityDTO;
-import bugbusters.everyonecodes.java.usermanagement.data.UserPrivateDTO;
-import bugbusters.everyonecodes.java.usermanagement.rolemanagement.organization.ClientPublicDTO;
+import bugbusters.everyonecodes.java.usermanagement.data.UserPublicDTO;
+import bugbusters.everyonecodes.java.usermanagement.data.VolunteerPrivateDTO;
+import bugbusters.everyonecodes.java.usermanagement.data.VolunteerPublicDTO;
+import bugbusters.everyonecodes.java.usermanagement.service.VolunteerService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -62,41 +64,41 @@ class VolunteerEndpointTest {
     @WithMockUser(username = "test", password = "Testing1#", authorities = {"ROLE_VOLUNTEER"})
     void editUserProfile_validInput() throws Exception {
         String username = "test";
-        VolunteerPrivateDTO input = new VolunteerPrivateDTO(new UserPrivateDTO("test", "test", "test", null, null, "test.test@test.com", null), "cooking;testing;ability to not scream out of frustration");
-        Mockito.when(volunteerService.editVolunteerData(input, username))
+        VolunteerPrivateDTO input = new VolunteerPrivateDTO(username, "cooking;testing;ability to not scream out of frustration");
+        Mockito.when(volunteerService.editVolunteerData(input))
                 .thenReturn(Optional.of(input));
         mockMvc.perform(MockMvcRequestBuilders.put(url + "/edit")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(new ObjectMapper().writeValueAsString(input))
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.status().isOk());
-        Mockito.verify(volunteerService).editVolunteerData(input, username);
+        Mockito.verify(volunteerService).editVolunteerData(input);
     }
 
     @Test
     @WithMockUser(username = "test", password = "Testing1#", authorities = {"ROLE_VOLUNTEER"})
-    void editUserProfile_invalidUserPrivateDTO() throws Exception {
-        String username = "test";
-        VolunteerPrivateDTO input = new VolunteerPrivateDTO(new UserPrivateDTO("test", "test", null, null, null, null, null), "testing");
+    void editUserProfile_forbidden() throws Exception {
+        String username = "notTest";
+        VolunteerPrivateDTO input = new VolunteerPrivateDTO(username, "testing");
         mockMvc.perform(MockMvcRequestBuilders.put(url + "/edit")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(new ObjectMapper().writeValueAsString(input))
                         .accept(MediaType.APPLICATION_JSON))
-                .andExpect(MockMvcResultMatchers.status().isBadRequest());
-        Mockito.verify(volunteerService, Mockito.never()).editVolunteerData(input, username);
+                .andExpect(MockMvcResultMatchers.status().isForbidden());
+        Mockito.verify(volunteerService, Mockito.never()).editVolunteerData(input);
     }
 
     @Test
     @WithMockUser(username = "test", password = "Testing1#", authorities = {"ROLE_VOLUNTEER"})
     void editUserProfile_invalidSkills() throws Exception {
         String username = "test";
-        VolunteerPrivateDTO input = new VolunteerPrivateDTO(new UserPrivateDTO("test", "test", "test", null, null, "test.test@test.com", null), "200 years");
+        VolunteerPrivateDTO input = new VolunteerPrivateDTO(username, "200 years");
         mockMvc.perform(MockMvcRequestBuilders.put(url + "/edit")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(new ObjectMapper().writeValueAsString(input))
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.status().isBadRequest());
-        Mockito.verify(volunteerService, Mockito.never()).editVolunteerData(input, username);
+        Mockito.verify(volunteerService, Mockito.never()).editVolunteerData(input);
     }
 
     //viewVolunteerPublicData Test
@@ -118,7 +120,7 @@ class VolunteerEndpointTest {
     void viewClientPublicData() throws Exception {
         String targetName = "target";
         Mockito.when(volunteerService.viewClientPublicData(targetName))
-                .thenReturn(Optional.of(new ClientPublicDTO()));
+                .thenReturn(Optional.of(new UserPublicDTO()));
         mockMvc.perform(MockMvcRequestBuilders.get(url + "/view/" + targetName)
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.status().isOk());

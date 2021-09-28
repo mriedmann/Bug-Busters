@@ -1,12 +1,14 @@
-package bugbusters.everyonecodes.java.usermanagement.rolemanagement.organization;
+package bugbusters.everyonecodes.java.usermanagement.endpoints;
 
-import bugbusters.everyonecodes.java.activities.Activity;
 import bugbusters.everyonecodes.java.activities.ActivityDTO;
 import bugbusters.everyonecodes.java.activities.ActivityInputDTO;
 import bugbusters.everyonecodes.java.activities.ActivityService;
 import bugbusters.everyonecodes.java.search.FilterVolunteer;
-import bugbusters.everyonecodes.java.usermanagement.rolemanagement.volunteer.VolunteerPublicDTO;
-import bugbusters.everyonecodes.java.usermanagement.rolemanagement.volunteer.VolunteerSearchResultDTO;
+import bugbusters.everyonecodes.java.usermanagement.data.UserPrivateDTO;
+import bugbusters.everyonecodes.java.usermanagement.data.UserPublicDTO;
+import bugbusters.everyonecodes.java.usermanagement.service.OrganizationService;
+import bugbusters.everyonecodes.java.usermanagement.data.VolunteerPublicDTO;
+import bugbusters.everyonecodes.java.usermanagement.data.VolunteerSearchResultDTO;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -31,17 +33,17 @@ public class OrganizationEndpoint {
     }
 
     @GetMapping("/login")
-    ClientPrivateDTO viewOrganizationPrivateData(Authentication authentication) {
+    UserPrivateDTO viewOrganizationPrivateData(Authentication authentication) {
         return organizationService.viewOrganisationPrivateData(authentication.getName()).orElse(null);
     }
 
     @PutMapping("/edit")
-    ClientPrivateDTO editOrganizationData(@Valid @RequestBody ClientPrivateDTO edits, Authentication authentication) {
+    UserPrivateDTO editOrganizationData(@Valid @RequestBody UserPrivateDTO edits, Authentication authentication) {
         return organizationService.editOrganizationData(edits, authentication.getName()).orElse(null);
     }
 
     @GetMapping("/view")
-    ClientPublicDTO viewOrganizationPublicData(Authentication authentication) {
+    UserPublicDTO viewOrganizationPublicData(Authentication authentication) {
         return organizationService.viewOrganisationPublicData(authentication.getName()).orElse(null);
     }
 

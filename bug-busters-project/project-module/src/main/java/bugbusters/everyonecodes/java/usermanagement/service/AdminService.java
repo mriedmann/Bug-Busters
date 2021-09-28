@@ -1,11 +1,12 @@
-package bugbusters.everyonecodes.java.usermanagement.rolemanagement.admin;
+package bugbusters.everyonecodes.java.usermanagement.service;
 
+import bugbusters.everyonecodes.java.usermanagement.data.AdminDTO;
 import bugbusters.everyonecodes.java.usermanagement.data.Individual;
-import bugbusters.everyonecodes.java.usermanagement.rolemanagement.individual.IndividualRepository;
+import bugbusters.everyonecodes.java.usermanagement.repository.IndividualRepository;
 import bugbusters.everyonecodes.java.usermanagement.data.Organization;
-import bugbusters.everyonecodes.java.usermanagement.rolemanagement.organization.OrganizationRepository;
+import bugbusters.everyonecodes.java.usermanagement.repository.OrganizationRepository;
 import bugbusters.everyonecodes.java.usermanagement.data.Volunteer;
-import bugbusters.everyonecodes.java.usermanagement.rolemanagement.volunteer.VolunteerRepository;
+import bugbusters.everyonecodes.java.usermanagement.repository.VolunteerRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -40,14 +41,14 @@ public class AdminService {
     public List<AdminDTO> listAllOrganizations() {
         List<Organization> organizations = organizationRepository.findAll();
         return organizations.stream()
-                .map(e -> mapper.toAdminDTO(e.getUser()))
+                .map(e -> mapper.toAdminDTO(e))
                 .collect(Collectors.toList());
     }
 
     public List<AdminDTO> listAllIndividuals() {
         List<Individual> individuals = individualRepository.findAll();
         return individuals.stream()
-                .map(e -> mapper.toAdminDTO(e.getUser()))
+                .map(e -> mapper.toAdminDTO(e))
                 .collect(Collectors.toList());
     }
 

@@ -5,7 +5,7 @@ import bugbusters.everyonecodes.java.usermanagement.data.UserDTO;
 import bugbusters.everyonecodes.java.usermanagement.data.UserPrivateDTO;
 import bugbusters.everyonecodes.java.usermanagement.data.UserPublicDTO;
 import bugbusters.everyonecodes.java.usermanagement.repository.UserRepository;
-import bugbusters.everyonecodes.java.usermanagement.rolemanagement.UserFactory;
+import bugbusters.everyonecodes.java.usermanagement.UserFactory;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;

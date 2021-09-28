@@ -1,13 +1,10 @@
 package bugbusters.everyonecodes.java.usermanagement.data;
 
-import bugbusters.everyonecodes.java.usermanagement.rolemanagement.Client;
-
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.Objects;
 
 @Entity
-public class Individual extends User implements Client {
+public class Individual extends User {
 
     public Individual() {
     }
@@ -20,8 +17,4 @@ public class Individual extends User implements Client {
         super(username, password, role, fullName, birthday, address, email, description);
     }
 
-    @Override
-    public User getUser() {
-        return this;
-    }
 }

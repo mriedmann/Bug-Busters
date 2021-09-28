@@ -1,4 +1,4 @@
-package bugbusters.everyonecodes.java.usermanagement.rolemanagement;
+package bugbusters.everyonecodes.java.usermanagement;
 
 import bugbusters.everyonecodes.java.usermanagement.data.*;
 import bugbusters.everyonecodes.java.usermanagement.service.UserDTOMapper;

@@ -1,8 +1,10 @@
 package bugbusters.everyonecodes.java.usermanagement.rolemanagement.organization;
 
 import bugbusters.everyonecodes.java.usermanagement.data.UserPrivateDTO;
-import bugbusters.everyonecodes.java.usermanagement.rolemanagement.volunteer.VolunteerPublicDTO;
-import bugbusters.everyonecodes.java.usermanagement.rolemanagement.volunteer.VolunteerSearchResultDTO;
+import bugbusters.everyonecodes.java.usermanagement.data.UserPublicDTO;
+import bugbusters.everyonecodes.java.usermanagement.data.VolunteerPublicDTO;
+import bugbusters.everyonecodes.java.usermanagement.data.VolunteerSearchResultDTO;
+import bugbusters.everyonecodes.java.usermanagement.service.OrganizationService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -39,7 +41,7 @@ class OrganizationEndpointTest {
     void viewOrganizationPrivateData_authorized() throws Exception{
         String username = "test";
         Mockito.when(organizationService.viewOrganisationPrivateData(username))
-                .thenReturn(Optional.of(new ClientPrivateDTO()));
+                .thenReturn(Optional.of(new UserPrivateDTO()));
         mockMvc.perform(MockMvcRequestBuilders.get(url + "/login")
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.status().isOk());
@@ -50,7 +52,7 @@ class OrganizationEndpointTest {
     void viewOrganizationPrivateData_forbidden() throws Exception{
         String username = "test";
         Mockito.when(organizationService.viewOrganisationPrivateData(username))
-                .thenReturn(Optional.of(new ClientPrivateDTO()));
+                .thenReturn(Optional.of(new UserPrivateDTO()));
         mockMvc.perform(MockMvcRequestBuilders.get(url + "/login")
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.status().isForbidden());
@@ -63,7 +65,7 @@ class OrganizationEndpointTest {
     void viewOrganizationPublicData() throws Exception{
         String username = "test";
         Mockito.when(organizationService.viewOrganisationPublicData(username))
-                .thenReturn(Optional.of(new ClientPublicDTO()));
+                .thenReturn(Optional.of(new UserPublicDTO()));
         mockMvc.perform(MockMvcRequestBuilders.get(url + "/view")
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.status().isOk());
@@ -89,7 +91,7 @@ class OrganizationEndpointTest {
     @WithMockUser(username = "test", password = "Testing1#", authorities = {"ROLE_ORGANIZATION"})
     void editIndividualData_validInput() throws Exception {
         String username = "test";
-        ClientPrivateDTO input = new ClientPrivateDTO(new UserPrivateDTO("test", "test", "test", null, null, "test.test@test.com", null));
+        UserPrivateDTO input = new UserPrivateDTO("test", "test", "test", null, null, "test.test@test.com", null);
         Mockito.when(organizationService.editOrganizationData(input, username))
                 .thenReturn(Optional.of(input));
         mockMvc.perform(MockMvcRequestBuilders.put(url + "/edit")
@@ -103,7 +105,7 @@ class OrganizationEndpointTest {
     @WithMockUser(username = "test", password = "Testing1#", authorities = {"ROLE_ORGANIZATION"})
     void editIndividualData_invalidUserPrivateDTO() throws Exception {
         String username = "test";
-        ClientPrivateDTO input = new ClientPrivateDTO(new UserPrivateDTO("test", "test", null, null, null, "test.test@test.com", null));
+        UserPrivateDTO input = new UserPrivateDTO("test", "test", null, null, null, "test.test@test.com", null);
         Mockito.when(organizationService.editOrganizationData(input, username))
                 .thenReturn(Optional.of(input));
         mockMvc.perform(MockMvcRequestBuilders.put(url + "/edit")

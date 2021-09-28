@@ -1,5 +1,7 @@
-package bugbusters.everyonecodes.java.usermanagement.rolemanagement.admin;
+package bugbusters.everyonecodes.java.usermanagement.endpoints;
 
+import bugbusters.everyonecodes.java.usermanagement.data.AdminDTO;
+import bugbusters.everyonecodes.java.usermanagement.service.AdminService;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;

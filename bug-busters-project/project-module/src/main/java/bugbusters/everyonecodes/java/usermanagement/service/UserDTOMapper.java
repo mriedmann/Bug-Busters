@@ -41,7 +41,7 @@ public class UserDTOMapper {
             age = calculateAge(birthday, provider.getDateNow());
         }
         List<Integer> ratings = user.getRatings();
-        Double rating = calculateRating(ratings);
+        Double rating = RatingCalcUtil.calculateRating(ratings);
         return new UserPublicDTO(user.getUsername(), user.getFullName(), age, user.getDescription(), rating, user.getExperience());
     }
 
@@ -70,12 +70,4 @@ public class UserDTOMapper {
     Integer calculateAge(LocalDate birthDate, LocalDate currentDate) {
         return Period.between(birthDate, currentDate).getYears();
     }
-
-    public Double calculateRating(List<Integer> ratings) {
-        if (ratings.size() == 0) return null;
-        return ratings.stream()
-                .mapToDouble(Double::valueOf)
-                .sum() / ratings.size();
-    }
-
 }

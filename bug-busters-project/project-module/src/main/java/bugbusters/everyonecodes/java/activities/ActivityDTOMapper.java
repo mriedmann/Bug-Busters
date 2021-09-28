@@ -2,7 +2,7 @@ package bugbusters.everyonecodes.java.activities;
 
 import bugbusters.everyonecodes.java.usermanagement.data.User;
 import bugbusters.everyonecodes.java.usermanagement.repository.UserRepository;
-import bugbusters.everyonecodes.java.usermanagement.rolemanagement.volunteer.SetToStringMapper;
+import bugbusters.everyonecodes.java.usermanagement.service.SetToStringMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

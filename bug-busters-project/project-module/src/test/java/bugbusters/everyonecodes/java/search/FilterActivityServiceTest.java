@@ -35,7 +35,6 @@ class FilterActivityServiceTest {
     @ParameterizedTest
     @MethodSource("inputParams_filterSearchResults")
     void filterSearchResults(List<Activity> searchResults, List<User> creators, FilterActivity filterActivity, List<Activity> expected) {
-        Mockito.when(userDTOMapper.calculateRating(Mockito.anyList())).thenCallRealMethod();
         Mockito.when(userRepository.findOneByUsername(Mockito.any(String.class))).thenAnswer(invocation -> {
             String argument = String.valueOf(invocation.getArguments()[0]);
             return creators.stream()

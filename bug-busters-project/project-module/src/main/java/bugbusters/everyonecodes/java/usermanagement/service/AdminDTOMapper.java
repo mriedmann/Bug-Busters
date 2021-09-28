@@ -1,9 +1,9 @@
-package bugbusters.everyonecodes.java.usermanagement.rolemanagement.admin;
+package bugbusters.everyonecodes.java.usermanagement.service;
 
 import bugbusters.everyonecodes.java.activities.Activity;
 import bugbusters.everyonecodes.java.activities.Status;
+import bugbusters.everyonecodes.java.usermanagement.data.AdminDTO;
 import bugbusters.everyonecodes.java.usermanagement.data.User;
-import bugbusters.everyonecodes.java.usermanagement.service.UserDTOMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

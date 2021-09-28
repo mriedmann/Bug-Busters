@@ -3,17 +3,12 @@ package bugbusters.everyonecodes.java.usermanagement.data;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 @Data
 @AllArgsConstructor
-@NoArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class UserPublicDTO {
+public class VolunteerSearchResultDTO {
     private String username;
-    private String fullName;
-    private Integer age;
-    private String description;
+    private String skills;
     private Double rating;
-    private Integer experience;
 }

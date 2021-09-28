@@ -1,4 +1,4 @@
-package bugbusters.everyonecodes.java.usermanagement.rolemanagement.organization;
+package bugbusters.everyonecodes.java.usermanagement.repository;
 
 import bugbusters.everyonecodes.java.usermanagement.data.Organization;
 import org.springframework.data.jpa.repository.JpaRepository;

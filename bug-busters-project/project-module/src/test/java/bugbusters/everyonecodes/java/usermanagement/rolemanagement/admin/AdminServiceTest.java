@@ -1,12 +1,11 @@
 package bugbusters.everyonecodes.java.usermanagement.rolemanagement.admin;
 
-import bugbusters.everyonecodes.java.usermanagement.data.User;
-import bugbusters.everyonecodes.java.usermanagement.data.Individual;
-import bugbusters.everyonecodes.java.usermanagement.rolemanagement.individual.IndividualRepository;
-import bugbusters.everyonecodes.java.usermanagement.data.Organization;
-import bugbusters.everyonecodes.java.usermanagement.rolemanagement.organization.OrganizationRepository;
-import bugbusters.everyonecodes.java.usermanagement.data.Volunteer;
-import bugbusters.everyonecodes.java.usermanagement.rolemanagement.volunteer.VolunteerRepository;
+import bugbusters.everyonecodes.java.usermanagement.data.*;
+import bugbusters.everyonecodes.java.usermanagement.repository.IndividualRepository;
+import bugbusters.everyonecodes.java.usermanagement.repository.OrganizationRepository;
+import bugbusters.everyonecodes.java.usermanagement.repository.VolunteerRepository;
+import bugbusters.everyonecodes.java.usermanagement.service.AdminDTOMapper;
+import bugbusters.everyonecodes.java.usermanagement.service.AdminService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
