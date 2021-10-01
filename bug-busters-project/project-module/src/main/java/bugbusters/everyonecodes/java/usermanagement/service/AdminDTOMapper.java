@@ -2,7 +2,7 @@ package bugbusters.everyonecodes.java.usermanagement.service;
 
 import bugbusters.everyonecodes.java.activities.Activity;
 import bugbusters.everyonecodes.java.activities.Status;
-import bugbusters.everyonecodes.java.usermanagement.data.AdminDTO;
+import bugbusters.everyonecodes.java.usermanagement.api.AdminDTO;
 import bugbusters.everyonecodes.java.usermanagement.data.User;
 import org.springframework.stereotype.Service;
 

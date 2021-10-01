@@ -1,18 +1,18 @@
-package bugbusters.everyonecodes.java.usermanagement.data;
+package bugbusters.everyonecodes.java.usermanagement.api;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Pattern;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@JsonInclude(JsonInclude.Include.NON_NULL)
-public class VolunteerPublicDTO {
+public class VolunteerPrivateDTO {
     @NotEmpty
     private String username;
+    @Pattern(regexp = "^[a-zA-Z\s;]*$")
     private String skills;
 }

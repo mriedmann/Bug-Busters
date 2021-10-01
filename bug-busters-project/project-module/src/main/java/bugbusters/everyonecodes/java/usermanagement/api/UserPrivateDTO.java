@@ -1,7 +1,8 @@
-package bugbusters.everyonecodes.java.usermanagement.data;
+package bugbusters.everyonecodes.java.usermanagement.api;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
@@ -9,13 +10,13 @@ import java.time.LocalDate;
 
 @Data
 @AllArgsConstructor
-public class UserDTO {
+@NoArgsConstructor
+public class UserPrivateDTO {
     @NotEmpty
     private String username;
     @NotEmpty
-    private String password;
-    @NotEmpty
     private String role;
+    @NotEmpty
     private String fullName;
     private LocalDate birthday;
     private String address;

@@ -1,6 +1,6 @@
 package bugbusters.everyonecodes.java.usermanagement.rolemanagement.admin;
 
-import bugbusters.everyonecodes.java.usermanagement.data.AdminDTO;
+import bugbusters.everyonecodes.java.usermanagement.api.AdminDTO;
 import bugbusters.everyonecodes.java.usermanagement.data.Volunteer;
 import bugbusters.everyonecodes.java.usermanagement.service.AdminService;
 import org.junit.jupiter.api.Test;

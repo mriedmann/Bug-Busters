@@ -1,6 +1,6 @@
 package bugbusters.everyonecodes.java.usermanagement.endpoints;
 
-import bugbusters.everyonecodes.java.usermanagement.data.UserDTO;
+import bugbusters.everyonecodes.java.usermanagement.api.UserDTO;
 import bugbusters.everyonecodes.java.usermanagement.service.UserService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;

@@ -1,9 +1,9 @@
 package bugbusters.everyonecodes.java.usermanagement.service;
 
 import bugbusters.everyonecodes.java.usermanagement.data.Volunteer;
-import bugbusters.everyonecodes.java.usermanagement.data.VolunteerPrivateDTO;
-import bugbusters.everyonecodes.java.usermanagement.data.VolunteerPublicDTO;
-import bugbusters.everyonecodes.java.usermanagement.data.VolunteerSearchResultDTO;
+import bugbusters.everyonecodes.java.usermanagement.api.VolunteerPrivateDTO;
+import bugbusters.everyonecodes.java.usermanagement.api.VolunteerPublicDTO;
+import bugbusters.everyonecodes.java.usermanagement.api.VolunteerSearchResultDTO;
 import org.springframework.stereotype.Service;
 
 @Service

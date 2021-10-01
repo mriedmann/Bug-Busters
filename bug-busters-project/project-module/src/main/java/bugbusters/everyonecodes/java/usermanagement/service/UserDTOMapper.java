@@ -1,8 +1,8 @@
 package bugbusters.everyonecodes.java.usermanagement.service;
 
-import bugbusters.everyonecodes.java.usermanagement.data.UserDTO;
-import bugbusters.everyonecodes.java.usermanagement.data.UserPrivateDTO;
-import bugbusters.everyonecodes.java.usermanagement.data.UserPublicDTO;
+import bugbusters.everyonecodes.java.usermanagement.api.UserDTO;
+import bugbusters.everyonecodes.java.usermanagement.api.UserPrivateDTO;
+import bugbusters.everyonecodes.java.usermanagement.api.UserPublicDTO;
 import bugbusters.everyonecodes.java.usermanagement.data.User;
 import org.springframework.stereotype.Service;
 

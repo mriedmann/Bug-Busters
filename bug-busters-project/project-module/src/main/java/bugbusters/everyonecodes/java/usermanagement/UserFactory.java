@@ -1,5 +1,6 @@
 package bugbusters.everyonecodes.java.usermanagement;
 
+import bugbusters.everyonecodes.java.usermanagement.api.UserDTO;
 import bugbusters.everyonecodes.java.usermanagement.data.*;
 import bugbusters.everyonecodes.java.usermanagement.service.UserDTOMapper;
 import org.springframework.security.crypto.password.PasswordEncoder;

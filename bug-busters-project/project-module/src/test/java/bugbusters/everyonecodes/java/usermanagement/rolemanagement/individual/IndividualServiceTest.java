@@ -2,6 +2,10 @@ package bugbusters.everyonecodes.java.usermanagement.rolemanagement.individual;
 
 import bugbusters.everyonecodes.java.activities.*;
 import bugbusters.everyonecodes.java.search.VolunteerTextSearchService;
+import bugbusters.everyonecodes.java.usermanagement.api.UserPrivateDTO;
+import bugbusters.everyonecodes.java.usermanagement.api.UserPublicDTO;
+import bugbusters.everyonecodes.java.usermanagement.api.VolunteerPublicDTO;
+import bugbusters.everyonecodes.java.usermanagement.api.VolunteerSearchResultDTO;
 import bugbusters.everyonecodes.java.usermanagement.data.*;
 import bugbusters.everyonecodes.java.usermanagement.repository.IndividualRepository;
 import bugbusters.everyonecodes.java.usermanagement.repository.VolunteerRepository;

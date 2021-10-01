@@ -1,4 +1,4 @@
-package bugbusters.everyonecodes.java.usermanagement.data;
+package bugbusters.everyonecodes.java.usermanagement.api;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.AllArgsConstructor;

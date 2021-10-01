@@ -1,9 +1,9 @@
 package bugbusters.everyonecodes.java.usermanagement.rolemanagement.individual;
 
-import bugbusters.everyonecodes.java.usermanagement.data.UserPrivateDTO;
-import bugbusters.everyonecodes.java.usermanagement.data.UserPublicDTO;
-import bugbusters.everyonecodes.java.usermanagement.data.VolunteerPublicDTO;
-import bugbusters.everyonecodes.java.usermanagement.data.VolunteerSearchResultDTO;
+import bugbusters.everyonecodes.java.usermanagement.api.UserPrivateDTO;
+import bugbusters.everyonecodes.java.usermanagement.api.UserPublicDTO;
+import bugbusters.everyonecodes.java.usermanagement.api.VolunteerPublicDTO;
+import bugbusters.everyonecodes.java.usermanagement.api.VolunteerSearchResultDTO;
 import bugbusters.everyonecodes.java.usermanagement.service.IndividualService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Assertions;

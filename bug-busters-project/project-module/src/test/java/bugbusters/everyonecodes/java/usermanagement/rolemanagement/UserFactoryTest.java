@@ -1,6 +1,7 @@
 package bugbusters.everyonecodes.java.usermanagement.rolemanagement;
 
 import bugbusters.everyonecodes.java.usermanagement.UserFactory;
+import bugbusters.everyonecodes.java.usermanagement.api.UserDTO;
 import bugbusters.everyonecodes.java.usermanagement.data.*;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;

@@ -1,5 +1,9 @@
 package bugbusters.everyonecodes.java.usermanagement.rolemanagement.volunteer;
 
+import bugbusters.everyonecodes.java.usermanagement.api.UserPrivateDTO;
+import bugbusters.everyonecodes.java.usermanagement.api.UserPublicDTO;
+import bugbusters.everyonecodes.java.usermanagement.api.VolunteerPrivateDTO;
+import bugbusters.everyonecodes.java.usermanagement.api.VolunteerPublicDTO;
 import bugbusters.everyonecodes.java.usermanagement.data.*;
 import bugbusters.everyonecodes.java.usermanagement.service.SetToStringMapper;
 import bugbusters.everyonecodes.java.usermanagement.service.UserDTOMapper;

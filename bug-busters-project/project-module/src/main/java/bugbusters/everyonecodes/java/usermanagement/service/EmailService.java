@@ -4,7 +4,7 @@ import bugbusters.everyonecodes.java.notification.Notification;
 import bugbusters.everyonecodes.java.notification.NotificationService;
 import bugbusters.everyonecodes.java.usermanagement.data.EmailSchedule;
 import bugbusters.everyonecodes.java.usermanagement.data.User;
-import bugbusters.everyonecodes.java.usermanagement.data.UserPrivateDTO;
+import bugbusters.everyonecodes.java.usermanagement.api.UserPrivateDTO;
 import bugbusters.everyonecodes.java.usermanagement.repository.UserRepository;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;

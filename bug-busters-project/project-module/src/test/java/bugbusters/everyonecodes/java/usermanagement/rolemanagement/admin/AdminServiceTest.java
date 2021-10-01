@@ -1,5 +1,6 @@
 package bugbusters.everyonecodes.java.usermanagement.rolemanagement.admin;
 
+import bugbusters.everyonecodes.java.usermanagement.api.AdminDTO;
 import bugbusters.everyonecodes.java.usermanagement.data.*;
 import bugbusters.everyonecodes.java.usermanagement.repository.IndividualRepository;
 import bugbusters.everyonecodes.java.usermanagement.repository.OrganizationRepository;

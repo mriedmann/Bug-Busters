@@ -1,8 +1,8 @@
 package bugbusters.everyonecodes.java.usermanagement.service;
 
 import bugbusters.everyonecodes.java.usermanagement.data.User;
-import bugbusters.everyonecodes.java.usermanagement.data.UserPrivateDTO;
-import bugbusters.everyonecodes.java.usermanagement.data.UserPublicDTO;
+import bugbusters.everyonecodes.java.usermanagement.api.UserPrivateDTO;
+import bugbusters.everyonecodes.java.usermanagement.api.UserPublicDTO;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;

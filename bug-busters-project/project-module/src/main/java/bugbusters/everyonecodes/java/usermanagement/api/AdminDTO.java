@@ -1,4 +1,4 @@
-package bugbusters.everyonecodes.java.usermanagement.data;
+package bugbusters.everyonecodes.java.usermanagement.api;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
